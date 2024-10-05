@@ -1,9 +1,6 @@
 import {Document, model, models, Schema} from 'mongoose';
 
-interface IPersonalInfo extends Document {
-    name: {
-        [key: string]: string;
-    };
+export interface IPersonalInfo extends Document {
     avatar: string;
     bio: {
         [key: string]: string;
@@ -14,15 +11,11 @@ interface IPersonalInfo extends Document {
         twitter?: string;
         telegram?: string;
         instagram?: string;
+        email?: string;
     };
 }
 
 const PersonalInfoSchema = new Schema<IPersonalInfo>({
-    name: {
-        type: Map,
-        of: String,
-        required: true,
-    },
     avatar: {type: String, required: true},
     bio: {
         type: Map,
@@ -35,7 +28,8 @@ const PersonalInfoSchema = new Schema<IPersonalInfo>({
         twitter: String,
         telegram: String,
         instagram: String,
+        email: String
     },
 });
 
-export default models.PersonalInfo ||  model<IPersonalInfo>('PersonalInfo', PersonalInfoSchema);
+export default models.PersonalInfo || model<IPersonalInfo>('PersonalInfo', PersonalInfoSchema);

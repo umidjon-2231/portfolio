@@ -1,13 +1,15 @@
 import type {Metadata} from "next";
 import "./styles/globals.css";
 import React from "react";
-import {ReCaptchaProvider} from "next-recaptcha-v3";
-
+import Loading from "@/components/Loading";
+import {Inria_Sans} from "next/font/google"
 
 export const metadata: Metadata = {
     title: "Umid's portfolio",
     description: "Portfolio of Umidjon Tojiboyev. Designed and coded by himself",
 };
+
+const inria = Inria_Sans({ weight: ["300", "400", "700"], subsets: ["latin"]})
 
 export default function RootLayout({
                                        children,
@@ -17,11 +19,11 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body
-            className={``}
+            className={inria.className}
         >
-        <ReCaptchaProvider>
+        <Loading>
             {children}
-        </ReCaptchaProvider>
+        </Loading>
         </body>
         </html>
     );

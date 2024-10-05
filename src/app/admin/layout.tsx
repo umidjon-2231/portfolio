@@ -2,6 +2,7 @@
 import React, {FC, PropsWithChildren, useEffect} from 'react';
 import {AdminContext, sessionStorageTokenKey} from './context';
 import AdminAuth from "@/components/AdminAuth";
+import {ReCaptchaProvider} from "next-recaptcha-v3";
 
 
 const Layout: FC<PropsWithChildren> = ({children}) => {
@@ -16,7 +17,9 @@ const Layout: FC<PropsWithChildren> = ({children}) => {
 
     return (
         <AdminContext.Provider value={{token}}>
-            {token?children:<AdminAuth/>}
+            <ReCaptchaProvider>
+                {token ? children : <AdminAuth/>}
+            </ReCaptchaProvider>
         </AdminContext.Provider>
     );
 };

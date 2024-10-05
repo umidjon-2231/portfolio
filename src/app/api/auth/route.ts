@@ -8,7 +8,6 @@ import {sendEmailToAdmin} from "@/lib/email";
 import {sendCode} from "@/lib/email/templates";
 import {checkStringForIp} from "@/lib/auth";
 import dbConnect from "@/lib/mongodb";
-import Token from "@/db/scheme/token";
 
 
 export const POST = async (req: NextRequest) => {
