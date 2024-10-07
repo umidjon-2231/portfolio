@@ -10,12 +10,7 @@ interface HomePageProps {
 }
 
 const HomePage: FC<HomePageProps> = memo<HomePageProps>(({lang}) => {
-    const {hideLoading} = useLoading();
-    useEffect(() => {
-        hideLoading();
-    }, [hideLoading]);
-
-    const {dictionary} = useDictionary(lang);
+    const {dictionary, language} = useDictionary(lang);
 
     const navItems = useMemo(() => [
         {href: "#about", text: dictionary.navbar.items.about},
@@ -27,7 +22,7 @@ const HomePage: FC<HomePageProps> = memo<HomePageProps>(({lang}) => {
     return (
         <div className={"container mx-auto px-4"}>
             <Navbar items={navItems} downloadCV={dictionary.navbar.downloadCv}/>
-            <Hero title={dictionary.hero.title}/>
+            <Hero title={dictionary.hero.title} lang={lang ?? language}/>
         </div>
     );
 });

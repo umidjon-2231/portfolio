@@ -1,7 +1,7 @@
 "use client"
 import React, {FC, PropsWithChildren, useEffect} from 'react';
 import {AdminContext, sessionStorageTokenKey} from './context';
-import AdminAuth from "@/components/AdminAuth";
+import AdminAuth from "@/components/admin/AdminAuth";
 import {ReCaptchaProvider} from "next-recaptcha-v3";
 
 

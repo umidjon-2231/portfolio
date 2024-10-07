@@ -8,6 +8,8 @@ export type Dictionary = {
     [key: (LanguageEnum)[number]]: typeof en;
 }
 
+export const DEFAULT_LANG: LanguageEnum = "en"
+
 export const useDictionary = (lang?: LanguageEnum | null) => {
     console.log(lang)
     const [language, setLanguage] =
