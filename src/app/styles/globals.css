@@ -5,6 +5,8 @@
 :root {
     --background: #ffffff;
     --foreground: #030712;
+    --skeleton-base: #ebebeb;
+    --skeleton-highlight: #f5f5f5;
     --loader-color: blue;
 }
 
@@ -12,6 +14,8 @@
     :root {
         --background: #030712;
         --foreground: #ededed;
+        --skeleton-base: #202020;
+        --skeleton-highlight: #444;
     }
 }
 
@@ -41,11 +45,6 @@ body {
     animation: spin 1s linear infinite;
 }
 
-.hero {
-    .hero-title {
-        font-size: 4rem;
-    }
-}
 
 @keyframes spin {
     0% {

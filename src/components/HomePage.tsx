@@ -1,6 +1,5 @@
 "use client"
-import {useLoading} from "@/components/Loading";
-import React, {FC, memo, useEffect, useMemo} from "react";
+import React, {FC, memo, useMemo} from "react";
 import Navbar from "@/components/Navbar";
 import {LanguageEnum, useDictionary} from "@/locales";
 import Hero from "@/components/Hero";
@@ -10,7 +9,7 @@ interface HomePageProps {
 }
 
 const HomePage: FC<HomePageProps> = memo<HomePageProps>(({lang}) => {
-    const {dictionary, language} = useDictionary(lang);
+    const [dictionary, {language}] = useDictionary(lang);
 
     const navItems = useMemo(() => [
         {href: "#about", text: dictionary.navbar.items.about},

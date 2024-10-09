@@ -1,14 +1,18 @@
-import {Document, model, models, Schema} from 'mongoose';
+import {model, models, Schema} from 'mongoose';
 
-export interface IPersonalInfo extends Document {
+export interface IPersonalInfo {
     avatar: string;
     bio: {
         [key: string]: string;
-    };
+    }
+    city: string,
+    status: {
+        [key: string]: string;
+    },
     socialLinks: {
         github?: string;
         linkedin?: string;
-        twitter?: string;
+        x?: string;
         telegram?: string;
         instagram?: string;
         email?: string;
@@ -17,7 +21,13 @@ export interface IPersonalInfo extends Document {
 
 const PersonalInfoSchema = new Schema<IPersonalInfo>({
     avatar: {type: String, required: true},
+    city: {type: String, required: true},
     bio: {
+        type: Map,
+        of: String,
+        required: true,
+    },
+    status: {
         type: Map,
         of: String,
         required: true,
@@ -25,7 +35,7 @@ const PersonalInfoSchema = new Schema<IPersonalInfo>({
     socialLinks: {
         github: String,
         linkedin: String,
-        twitter: String,
+        x: String,
         telegram: String,
         instagram: String,
         email: String

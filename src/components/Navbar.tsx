@@ -32,7 +32,7 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({items, downloadCV}) => {
                         >
                             <span className="sr-only">Open main menu</span>
 
-                            <svg className="block h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            <svg className="block h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                       d="M4 6h16M4 12h16m-7 6h7"/>
@@ -51,7 +51,7 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({items, downloadCV}) => {
                 </div>
             </div>
             <div
-                className={`fixed inset-0 z-[1001] transition-transform transform ${isOpen ? 'translate-x-1/2' : 'translate-x-[100%]'} bg-gray-800 sm:hidden`}>
+                className={`fixed inset-0 z-[1001] transition-transform duration-500 transform ${isOpen ? 'translate-x-1/2' : 'translate-x-[100%]'} bg-gray-800 sm:hidden`}>
                 <div className={"flex justify-start p-5"} onClick={toggleNavbar}>
                     <svg className="block h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">

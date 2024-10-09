@@ -1,9 +1,10 @@
 import type {Metadata} from "next";
 import "./styles/globals.css";
 import React from "react";
-import Loading from "@/components/Loading";
 import {Inria_Sans} from "next/font/google"
 import {StoreProvider} from "@/components/StoreProvider";
+import 'react-loading-skeleton/dist/skeleton.css'
+import {SkeletonTheme} from "react-loading-skeleton";
 
 export const metadata: Metadata = {
     title: "Umid's portfolio",
@@ -19,12 +20,17 @@ export default function RootLayout({
 }>) {
     return (
         <StoreProvider>
-            <html lang="en">
+            <html lang={"en"}>
+            <head>
+                <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet"/>
+            </head>
             <body
                 className={inria.className}
             >
             {/*<Loading>*/}
+            <SkeletonTheme baseColor="var(--skeleton-base)" highlightColor="var(--skeleton-highlight)">
                 {children}
+            </SkeletonTheme>
             {/*</Loading>*/}
             </body>
             </html>

@@ -1,4 +1,4 @@
-const uz = {
+const en = {
     chooseLanguage: "Select a language",
     locale: "English",
     errors: {
@@ -16,8 +16,11 @@ const uz = {
         downloadCv: "Download CV",
     },
     hero: {
-        title: "Hi, I'm Umid 👋"
+        title: "Hi, I'm Umid 👋",
+        noBio: "This is place for my bio but it didn't load because of your bad internet",
+        noCity: "City not loaded",
+        noStatus: "Status also :(",
     },
 }
 
-export default uz;
+export default en;

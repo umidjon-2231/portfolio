@@ -7,7 +7,7 @@ interface ErrorContainerProps {
 }
 
 const ErrorContainer: FC<ErrorContainerProps> = memo<ErrorContainerProps>(({msg}) => {
-    const {dictionary} = useDictionary();
+    const [dictionary] = useDictionary();
 
     return (
         <div>

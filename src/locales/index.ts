@@ -1,6 +1,6 @@
 import en from "./en";
 import {useMemo, useState} from "react";
-import ru from "@/locales/ru";
+import ru from "./ru";
 
 export type LanguageEnum = "uz" | "ru" | "en"
 
@@ -8,17 +8,21 @@ export type Dictionary = {
     [key: (LanguageEnum)[number]]: typeof en;
 }
 
+export type DictionaryType = typeof en;
+
 export const DEFAULT_LANG: LanguageEnum = "en"
 
-export const useDictionary = (lang?: LanguageEnum | null) => {
-    console.log(lang)
+export const useDictionary = (lang?: LanguageEnum | null): [DictionaryType, {
+    language: LanguageEnum,
+    setLanguage: (lang: LanguageEnum) => void
+}] => {
     const [language, setLanguage] =
         useState<LanguageEnum>(lang ?? "en");
 
     const wrappedDic =
-        useMemo(() => dictionary[language], [language])
+        useMemo<DictionaryType>(() => dictionary[language], [language])
 
-    return {language, setLanguage, dictionary: wrappedDic}
+    return [wrappedDic, {language, setLanguage}]
 }
 
 export const dictionary: Dictionary = {
