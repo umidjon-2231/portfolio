@@ -1,7 +1,7 @@
 import {IPersonalInfo} from "@/db/scheme/personalInfo";
 
 export const DEFAULT_INFO: IPersonalInfo = {
-    bio: {
+    shortBio: {
         en: "I am fullstack developer with 3 year of experience in coding.",
         ru: "Я FullStack разработчик с 3-летним опытом программирования.",
     },

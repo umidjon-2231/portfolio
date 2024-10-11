@@ -2,7 +2,7 @@ import {model, models, Schema} from 'mongoose';
 
 export interface IPersonalInfo {
     avatar: string;
-    bio: {
+    shortBio: {
         [key: string]: string;
     }
     city: string,
@@ -22,7 +22,7 @@ export interface IPersonalInfo {
 const PersonalInfoSchema = new Schema<IPersonalInfo>({
     avatar: {type: String, required: true},
     city: {type: String, required: true},
-    bio: {
+    shortBio: {
         type: Map,
         of: String,
         required: true,

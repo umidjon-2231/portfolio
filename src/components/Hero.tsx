@@ -25,7 +25,7 @@ const Hero: FC<HeroProps> = memo<HeroProps>(({title, lang = DEFAULT_LANG}) => {
                 </div>
                 <div className={"w-full mt-5 md:ms-1"}>
                     <p>
-                        {isLoading ? <Skeleton count={3}/> : (data?.bio[lang] || dictionary.hero.noBio)}
+                        {isLoading ? <Skeleton count={3}/> : (data?.shortBio[lang] || dictionary.hero.noBio)}
                     </p>
                     <div className={"my-3 flex"}>
                         <span className="material-symbols-outlined">location_on</span>
