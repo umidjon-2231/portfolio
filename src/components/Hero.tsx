@@ -3,9 +3,8 @@ import React, {FC, memo} from 'react';
 import {DEFAULT_LANG, LanguageEnum, useDictionary} from "@/locales";
 import {useGetInfoQuery} from "@/lib/redux/services/info/infoApiSlice";
 import Skeleton from "react-loading-skeleton";
-import Image from "next/image"
-import DEFAULT_USER_ICON from "@/app/images/icons/user_circle.svg"
 import SocialLinks from "@/components/SocialLinks";
+import Avatar from "@/components/Avatar";
 
 interface HeroProps {
     title: string;
@@ -45,21 +44,7 @@ const Hero: FC<HeroProps> = memo<HeroProps>(({title, lang = DEFAULT_LANG}) => {
                 </div>
             </div>
             <div className={"md:w-1/2 flex justify-center md:justify-end"}>
-                <div
-                    className={" md:me-3 border-4 border-solid box-content dark:border-white border-gray-200 rounded-full"}
-                    style={{width: IMAGE_SIZE, height: IMAGE_SIZE,}}>
-                    {isLoading ?
-                        <Skeleton borderRadius={999} width={IMAGE_SIZE} height={IMAGE_SIZE}
-                                  style={{lineHeight: "inherit"}}/> :
-                        <Image
-                            loading={"eager"}
-                            className={"rounded-full"}
-                            src={"/api/attachment/"+data?.avatar || DEFAULT_USER_ICON.src}
-                            alt={"my photo"}
-                            width={IMAGE_SIZE} height={IMAGE_SIZE} placeholder={"empty"}
-                        />
-                    }
-                </div>
+                <Avatar src={data?.avatar ? "/api/attachment/" + data.avatar : ""} image_size={IMAGE_SIZE}/>
             </div>
         </div>
     );
