@@ -1,14 +1,17 @@
 import {model, models, Schema} from 'mongoose';
+import {ObjectId} from "mongodb";
 
 export interface IAbout {
-    avatar: string;
-    bio: {
-        [key: string]: string;
-    }
+    avatar: typeof ObjectId;
+    bio: Record<string, string>
 }
 
 const AboutSchema = new Schema<IAbout>({
-    avatar: {type: String, required: true},
+    avatar: {
+        type: ObjectId,
+        required: true,
+        ref: "Attachment"
+    },
     bio: {
         type: Map,
         of: String,

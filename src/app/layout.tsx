@@ -8,7 +8,9 @@ import {SkeletonTheme} from "react-loading-skeleton";
 
 export const metadata: Metadata = {
     title: "Umid's portfolio",
-    description: "Portfolio of Umidjon Tojiboyev. Designed and coded by himself",
+    description: "Portfolio of Umidjon Tojiboyev. Designed and coded by himself!",
+    keywords: ["Umid", "Umidjon", "Tojiboyev", "Umidjon Tojiboyev" ,
+        "portfolio", "web developer", "react", "typescript", "next.js", "tashkent", "uzbekistan"],
 };
 
 const inria = Inria_Sans({weight: ["300", "400", "700"], subsets: ["latin"]})

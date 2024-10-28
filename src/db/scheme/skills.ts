@@ -3,9 +3,7 @@ import { Schema, model, Document } from 'mongoose';
 interface ISkill extends Document {
     name: string;
     logo: string;
-    description: {
-        [key: string]: string;
-    };
+    description: Record<string, string>;
 }
 
 const SkillSchema = new Schema<ISkill>({

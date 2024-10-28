@@ -1,14 +1,11 @@
-import {model, models, Schema} from 'mongoose';
+import {model, models, Types, Schema} from 'mongoose';
+
 
 export interface IPersonalInfo {
-    avatar: string;
-    shortBio: {
-        [key: string]: string;
-    }
+    avatar:  typeof Types.ObjectId;
+    shortBio: Record<string, string>
     city: string,
-    status: {
-        [key: string]: string;
-    },
+    status: Record<string, string>
     socialLinks: {
         github?: string;
         linkedin?: string;
@@ -20,7 +17,11 @@ export interface IPersonalInfo {
 }
 
 const PersonalInfoSchema = new Schema<IPersonalInfo>({
-    avatar: {type: String, required: true},
+    avatar: {
+        type: Types.ObjectId,
+        required: true,
+        ref: 'Attachment'
+    },
     city: {type: String, required: true},
     shortBio: {
         type: Map,

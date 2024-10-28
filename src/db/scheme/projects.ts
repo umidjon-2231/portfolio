@@ -1,12 +1,8 @@
 import { Schema, model, Document } from 'mongoose';
 
 interface IProject extends Document {
-    title: {
-        [key: string]: string;
-    };
-    description: {
-        [key: string]: string;
-    };
+    title: Record<string, string>;
+    description: Record<string, string>;
     techStack: string[];
     links: {
         github?: string;

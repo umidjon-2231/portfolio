@@ -1,15 +1,11 @@
 import { Schema, model, Document } from 'mongoose';
 
 interface IExperience extends Document {
-    title: {
-        [key: string]: string;
-    };
+    title: Record<string, string>;
     company: string;
     startDate: Date;
     endDate?: Date;
-    description: {
-        [key: string]: string;
-    };
+    description: Record<string, string>;
 }
 
 const ExperienceSchema = new Schema<IExperience>({

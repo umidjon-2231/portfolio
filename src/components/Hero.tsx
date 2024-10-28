@@ -12,14 +12,14 @@ interface HeroProps {
     lang?: LanguageEnum
 }
 
-const IMAGE_SIZE=350
+const IMAGE_SIZE = 350
 const Hero: FC<HeroProps> = memo<HeroProps>(({title, lang = DEFAULT_LANG}) => {
     const {data, isLoading} = useGetInfoQuery();
     const [dictionary] = useDictionary(lang)
 
     return (
         <div className={"flex flex-col-reverse md:flex-row justify-center md:justify-between"}>
-            <div className={"md:w-1/2  mt-5 md:mt-0"}>
+            <div className={"md:w-3/4  mt-5 md:mt-0"}>
                 <div className={"text-center md:text-start"}>
                     <b className={"text-[3rem] md:text-[4rem]"}>{title}</b>
                 </div>
@@ -45,12 +45,19 @@ const Hero: FC<HeroProps> = memo<HeroProps>(({title, lang = DEFAULT_LANG}) => {
                 </div>
             </div>
             <div className={"md:w-1/2 flex justify-center md:justify-end"}>
-                <div className={" md:me-3"}
-                     style={{width: IMAGE_SIZE, height: IMAGE_SIZE}}>
+                <div
+                    className={" md:me-3 border-4 border-solid box-content dark:border-white border-gray-200 rounded-full"}
+                    style={{width: IMAGE_SIZE, height: IMAGE_SIZE,}}>
                     {isLoading ?
-                        <Skeleton borderRadius={999} width={IMAGE_SIZE} height={IMAGE_SIZE} style={{lineHeight: "inherit"}}/> :
-                        <Image className={""} src={data?.avatar || DEFAULT_USER_ICON.src} alt={"my photo"}
-                               width={IMAGE_SIZE} height={IMAGE_SIZE}/>
+                        <Skeleton borderRadius={999} width={IMAGE_SIZE} height={IMAGE_SIZE}
+                                  style={{lineHeight: "inherit"}}/> :
+                        <Image
+                            loading={"eager"}
+                            className={"rounded-full"}
+                            src={"/api/attachment/"+data?.avatar || DEFAULT_USER_ICON.src}
+                            alt={"my photo"}
+                            width={IMAGE_SIZE} height={IMAGE_SIZE} placeholder={"empty"}
+                        />
                     }
                 </div>
             </div>
