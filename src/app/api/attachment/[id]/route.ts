@@ -4,8 +4,9 @@ type Params = {
     id: string
 }
 
-export const GET = async (req: Request, context: { params: Params }) => {
+export const GET = async (_req: Request, context: { params: Params }) => {
     try {
+        console.log(`Request to attachment ${context.params.id}`)
         const attachment = await Attachment.findById(context.params.id)
         if (!attachment) {
             return new Response(null, {

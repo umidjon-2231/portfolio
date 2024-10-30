@@ -11,7 +11,7 @@ interface HeroProps {
     lang?: LanguageEnum
 }
 
-const IMAGE_SIZE = 350
+const IMAGE_SIZE = 300
 const Hero: FC<HeroProps> = memo<HeroProps>(({title, lang = DEFAULT_LANG}) => {
     const {data, isLoading} = useGetInfoQuery();
     const [dictionary] = useDictionary(lang)

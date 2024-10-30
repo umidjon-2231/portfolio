@@ -51,7 +51,7 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({items, downloadCV}) => {
                 </div>
             </div>
             <div
-                className={`fixed inset-0 z-[1001] transition-transform duration-500 transform ${isOpen ? 'translate-x-1/2' : 'translate-x-[100%]'} bg-gray-800 sm:hidden`}>
+                className={`fixed inset-0 z-[1001] transition-transform duration-500 transform ${isOpen ? 'translate-x-1/2' : 'translate-x-[100%]'} bg-[var(--background)] sm:hidden`}>
                 <div className={"flex justify-start p-5"} onClick={toggleNavbar}>
                     <svg className="block h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +62,7 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({items, downloadCV}) => {
                 <div className="px-2 pt-2 pb-3">
                     {items.map(i => {
                         return <a key={i.text} href={i.href}
-                                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base">
+                                  className="text-[var(--foreground)] dark:text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base">
                             {i.text}</a>
                     })}
                     <div className={"mt-10 ms-2"}>
