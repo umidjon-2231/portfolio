@@ -1,0 +1,57 @@
+name: Build and host frontend
+on:
+  push:
+    branches: [ master ]
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Setup
+        run: npm install
+      - name: Test Application
+        run: npm run lint
+  build:
+    runs-on: ubuntu-22.04
+    needs: test
+    steps:
+      - name: Package
+        uses: appleboy/ssh-action@master
+        env:
+          PROJECT_PATH: ${{secrets.PROJECT_PATH}}
+          NAME: ${{ secrets.NAME }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: PROJECT_PATH, NAME
+          script: |
+            echo Locating path: "$PROJECT_PATH"
+            cd $PROJECT_PATH
+            git pull
+            docker build -t $NAME .
+  run:
+    runs-on: ubuntu-22.04
+    needs: [test, build]
+    steps:
+      - name: Run application
+        uses: appleboy/ssh-action@master
+        env:
+          PROJECT_PATH: ${{ secrets.PROJECT_PATH }}
+          NAME: ${{ secrets.NAME }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: PROJECT_PATH,NAME
+          script: |
+            echo Locating path: "$PROJECT_PATH"
+            cd $PROJECT_PATH
+            docker stop $NAME || true
+            docker rm $NAME || true
+            docker run -d --restart unless-stopped -p 3015:3000 --name $NAME $NAME
