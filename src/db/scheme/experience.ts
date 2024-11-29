@@ -6,6 +6,7 @@ interface IExperience extends Document {
     startDate: Date;
     endDate?: Date;
     description: Record<string, string>;
+    createdAt: Date;
 }
 
 const ExperienceSchema = new Schema<IExperience>({
@@ -22,6 +23,10 @@ const ExperienceSchema = new Schema<IExperience>({
         of: String,
         required: true,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    }
 });
 
 export default mongoose.models.Experience || model<IExperience>('Experience', ExperienceSchema);

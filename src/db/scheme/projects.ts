@@ -8,6 +8,7 @@ interface IProject extends Document {
         github?: string;
         liveDemo?: string;
     };
+    createdAt: Date;
 }
 
 const ProjectSchema = new Schema<IProject>({
@@ -26,6 +27,10 @@ const ProjectSchema = new Schema<IProject>({
         github: String,
         liveDemo: String,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    }
 });
 
 export default mongoose.models.Project ||  model<IProject>('Project', ProjectSchema);

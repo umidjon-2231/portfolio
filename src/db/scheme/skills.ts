@@ -4,6 +4,7 @@ interface ISkill extends Document {
     name: string;
     logo: string;
     description: Record<string, string>;
+    createdAt: Date;
 }
 
 const SkillSchema = new Schema<ISkill>({
@@ -14,6 +15,10 @@ const SkillSchema = new Schema<ISkill>({
         of: String,
         required: true,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    }
 });
 
 export default mongoose.models.Skill || model<ISkill>('Skill', SkillSchema);

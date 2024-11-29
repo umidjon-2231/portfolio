@@ -10,7 +10,6 @@ export const DEFAULT_INFO: IPersonalInfo = {
         github: "https://github.com/umidjon-2231",
         email: "mailto:tumidjon808@gmail.com",
         linkedin: "https://linkedin.com/in/tojiboyevumidjon",
-        x: "https://x.com/t_umidcheek",
         instagram: "https://instagram.com/t_umidcheek",
         telegram: "https://t.me/tojiboyevumidjon",
     },

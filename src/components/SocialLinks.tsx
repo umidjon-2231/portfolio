@@ -14,6 +14,7 @@ const SocialLinks: FC<SocialLinksProps> = memo<SocialLinksProps>((links) => {
                         // bgColor={"var(--background)"}
                                 network={key}
                                 href={value}
+                                target={"_blank"}
                                 style={{width: "3rem", height: "3rem"}}
                     />
                 </div>

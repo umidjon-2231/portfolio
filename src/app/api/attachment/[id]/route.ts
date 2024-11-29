@@ -1,4 +1,5 @@
 import Attachment from "@/db/scheme/attachment";
+import dbConnect from "@/lib/mongodb";
 
 type Params = {
     id: string
@@ -6,6 +7,7 @@ type Params = {
 
 export const GET = async (_req: Request, context: { params: Params }) => {
     try {
+        await dbConnect();
         console.log(`Request to attachment ${context.params.id}`)
         const attachment = await Attachment.findById(context.params.id)
         if (!attachment) {

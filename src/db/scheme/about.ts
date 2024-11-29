@@ -4,6 +4,7 @@ import {ObjectId} from "mongodb";
 export interface IAbout {
     avatar: typeof ObjectId;
     bio: Record<string, string>
+    createdAt: Date;
 }
 
 const AboutSchema = new Schema<IAbout>({
@@ -17,6 +18,10 @@ const AboutSchema = new Schema<IAbout>({
         of: String,
         required: true,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    }
 });
 
 export default models.About || model<IAbout>('About', AboutSchema);

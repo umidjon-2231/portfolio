@@ -14,6 +14,7 @@ export interface IPersonalInfo {
         instagram?: string;
         email?: string;
     };
+    createdAt: Date;
 }
 
 const PersonalInfoSchema = new Schema<IPersonalInfo>({
@@ -41,6 +42,10 @@ const PersonalInfoSchema = new Schema<IPersonalInfo>({
         instagram: String,
         email: String
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    }
 });
 
 export default models.PersonalInfo || model<IPersonalInfo>('PersonalInfo', PersonalInfoSchema);
