@@ -10,7 +10,7 @@ interface PageProps {
 const Page: FC<PageProps> = async props => {
     const params = await props.params;
     console.log(new Date().getTime())
-    const data=await axios.get("http://localhost:3000/api/info")
+    const data=await axios.get(process.env.DOMAIN+"/api/info")
     console.log(new Date().getTime())
     console.log(data);
     return <HomePage lang={params.lang} info={(data.data).data}/>

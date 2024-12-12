@@ -1,7 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import {verifyCaptcha} from "@/lib/recaptcha";
 import {createToken} from "@/db/service/token";
-import {INTERNALS} from "next/dist/server/web/spec-extension/request";
 import {addHours} from "date-fns";
 import {getCurrentTime} from "@/lib/time";
 import {sendEmailToAdmin} from "@/lib/email";
@@ -26,9 +25,9 @@ export const POST = async (req: NextRequest) => {
         if (!success) {
             return NextResponse.json({success: false, error}, {status: 400});
         }
-        let clientIP = req.headers.get('x-forwarded-for') || req[INTERNALS].ip;
+        let clientIP: string | null = req.headers.get('x-forwarded-for');
         if (!checkStringForIp(clientIP)) {
-            clientIP = undefined;
+            clientIP = "";
         }
         const newToken = await createToken(clientIP ?? "", addHours(getCurrentTime(), 6));
         console.log(newToken);

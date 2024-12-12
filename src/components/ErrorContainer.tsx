@@ -1,6 +1,6 @@
 "use client"
 import React, {FC, memo} from 'react';
-import {useDictionary} from "@/locales";
+import {useDictionary} from "@/locales/hook";
 
 interface ErrorContainerProps {
     msg?: string

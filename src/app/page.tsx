@@ -1,8 +1,12 @@
 import HomePage from "@/components/HomePage";
+import axios from "axios";
+import React from "react";
 console.log('root page')
 
 export default async function Home() {
-    const data=await fetch("http://localhost:3000/api/info")
+    console.log(new Date().getTime())
+    const data=await axios.get(process.env.DOMAIN+"/api/info")
+    console.log(new Date().getTime())
     console.log(data);
-    return <HomePage info={(await data.json()).data}/>
+    return <HomePage info={(data.data).data}/>
 }
