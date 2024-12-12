@@ -21,7 +21,7 @@ const Loading: FC<PropsWithChildren> = memo<PropsWithChildren>(({children}) => {
     const [loading, setLoading] = useState(true);
 
     return (
-        <LoadingContext.Provider value={{showLoading: () => setLoading(true), hideLoading: () => setLoading(false)}}>
+        <LoadingContext value={{showLoading: () => setLoading(true), hideLoading: () => setLoading(false)}}>
             {loading &&
                 <div
                     className="flex items-center justify-center min-h-screen fixed backdrop-blur-[2px] inset-0 z-[1060]"
@@ -30,7 +30,7 @@ const Loading: FC<PropsWithChildren> = memo<PropsWithChildren>(({children}) => {
                 </div>
             }
             {children}
-        </LoadingContext.Provider>
+        </LoadingContext>
     );
 
 });

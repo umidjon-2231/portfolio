@@ -1,14 +1,19 @@
 import HomePage from "@/components/HomePage";
 import React, {FC} from 'react';
 import {LanguageEnum} from "@/locales";
+import axios from "axios";
 
 interface PageProps {
-    params: { lang: LanguageEnum }
+    params: Promise<{ lang: LanguageEnum }>
 }
 
-console.log('lang page')
-const Page: FC<PageProps> = ({params}) => {
-    return <HomePage lang={params.lang}/>
+const Page: FC<PageProps> = async props => {
+    const params = await props.params;
+    console.log(new Date().getTime())
+    const data=await axios.get("http://localhost:3000/api/info")
+    console.log(new Date().getTime())
+    console.log(data);
+    return <HomePage lang={params.lang} info={(data.data).data}/>
 };
 
 export default Page;

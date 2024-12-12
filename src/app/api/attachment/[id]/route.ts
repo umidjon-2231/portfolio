@@ -5,11 +5,11 @@ type Params = {
     id: string
 }
 
-export const GET = async (_req: Request, context: { params: Params }) => {
+export const GET = async (_req: Request, context: { params: Promise<Params> }) => {
     try {
         await dbConnect();
-        console.log(`Request to attachment ${context.params.id}`)
-        const attachment = await Attachment.findById(context.params.id)
+        console.log(`Request to attachment ${(await context.params).id}`)
+        const attachment = await Attachment.findById((await context.params).id)
         if (!attachment) {
             return new Response(null, {
                 status: 404

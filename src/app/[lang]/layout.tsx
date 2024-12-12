@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     description: "Portfolio of Umidjon Tojiboyev. Designed and coded by himself",
 };
 
-const Layout = ({children}: PropsWithChildren) => {
+const Layout = async ({children}: PropsWithChildren) => {
     return <div>
         {children}
     </div>;

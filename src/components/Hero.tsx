@@ -1,20 +1,20 @@
 "use client"
 import React, {FC, memo} from 'react';
-import {DEFAULT_LANG, LanguageEnum, useDictionary} from "@/locales";
-import {useGetInfoQuery} from "@/lib/redux/services/info/infoApiSlice";
-import Skeleton from "react-loading-skeleton";
+import {DEFAULT_LANG, LanguageEnum,} from "@/locales";
 import SocialLinks from "@/components/SocialLinks";
 import Avatar from "@/components/Avatar";
 import {googleOutline} from "@/app/fonts";
+import {IPersonalInfo} from "@/db/scheme/personalInfo";
+import {useDictionary} from "@/locales/hook";
 
 interface HeroProps {
     title: string;
     lang?: LanguageEnum
+    data: IPersonalInfo
 }
 
 const IMAGE_SIZE = 300
-const Hero: FC<HeroProps> = memo<HeroProps>(({title, lang = DEFAULT_LANG}) => {
-    const {data, isLoading} = useGetInfoQuery();
+const Hero: FC<HeroProps> = memo<HeroProps>(({title, lang = DEFAULT_LANG, data}) => {
     const [dictionary] = useDictionary(lang)
 
     return (
@@ -26,18 +26,18 @@ const Hero: FC<HeroProps> = memo<HeroProps>(({title, lang = DEFAULT_LANG}) => {
                 </div>
                 <div className={"w-full mt-5 md:ms-1"}>
                     <p>
-                        {isLoading ? <Skeleton count={3}/> : (data?.shortBio[lang] || dictionary.hero.noBio)}
+                        {(data?.shortBio[lang] || dictionary.hero.noBio)}
                     </p>
                     <div className={"my-3 flex"}>
                         <span className={googleOutline.className}>location_on</span>
                         <b className={"w-1/2 md:w-1/4 ms-2"}>
-                            {isLoading ? <Skeleton/> : (data?.city || dictionary.hero.noCity)}
+                            {(data?.city || dictionary.hero.noCity)}
                         </b>
                     </div>
                     <div className={"my-3 flex"}>
                         <span className={googleOutline.className}>bolt</span>
                         <b className={"w-1/2 md:w-1/4 ms-2"}>
-                            {isLoading ? <Skeleton/> : (data?.status[lang] || dictionary.hero.noStatus)}
+                            {(data?.status[lang] || dictionary.hero.noStatus)}
                         </b>
                     </div>
                     <div className={"w-full mt-10"}>

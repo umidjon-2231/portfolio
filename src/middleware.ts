@@ -11,6 +11,7 @@ function getLocale(request: NextRequest): string | undefined {
 
     const locales: string[] = Object.keys(dictionary);
 
+    console.log(locales)
     const languages = new Negotiator({headers: negotiatorHeaders}).languages(
         locales,
     );

@@ -1,14 +1,17 @@
 "use client"
 import React, {FC, memo, useMemo} from "react";
 import Navbar from "@/components/Navbar";
-import {LanguageEnum, useDictionary} from "@/locales";
+import {LanguageEnum,} from "@/locales";
 import Hero from "@/components/Hero";
+import {IPersonalInfo} from "@/db/scheme/personalInfo";
+import {useDictionary} from "@/locales/hook";
 
 interface HomePageProps {
-    lang?: LanguageEnum | null
+    lang?: LanguageEnum | null,
+    info: IPersonalInfo
 }
 
-const HomePage: FC<HomePageProps> = memo<HomePageProps>(({lang}) => {
+const HomePage: FC<HomePageProps> = memo<HomePageProps>(({lang, info}) => {
     const [dictionary, {language}] = useDictionary(lang);
 
     const navItems = useMemo(() => [
@@ -21,7 +24,7 @@ const HomePage: FC<HomePageProps> = memo<HomePageProps>(({lang}) => {
     return (
         <div className={"container mx-auto px-4"}>
             <Navbar items={navItems} downloadCV={dictionary.navbar.downloadCv}/>
-            <Hero title={dictionary.hero.title} lang={lang ?? language}/>
+            <Hero title={dictionary.hero.title} lang={lang ?? language} data={info}/>
         </div>
     );
 });

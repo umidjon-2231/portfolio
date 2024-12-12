@@ -47,6 +47,7 @@ body {
 
 .hi-title{
     display: block;
+    user-select: none;
     animation: hi-sticker 1s linear infinite;
     -webkit-animation: hi-sticker 1s ease-in-out infinite;
 }
