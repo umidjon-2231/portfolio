@@ -8,9 +8,6 @@ export const GET = async () => {
         await dbConnect();
         const info = await PersonalInfo.findOne();
         if (!info) {
-            await new Promise((resolve) => {
-                setTimeout(resolve, 5000);
-            })
             // return NextResponse.json({message: "No personal info"}, {status: 400});
             return NextResponse.json({
                 data: DEFAULT_INFO,
