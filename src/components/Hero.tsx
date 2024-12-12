@@ -5,6 +5,7 @@ import {useGetInfoQuery} from "@/lib/redux/services/info/infoApiSlice";
 import Skeleton from "react-loading-skeleton";
 import SocialLinks from "@/components/SocialLinks";
 import Avatar from "@/components/Avatar";
+import {googleOutline} from "@/app/fonts";
 
 interface HeroProps {
     title: string;
@@ -19,21 +20,22 @@ const Hero: FC<HeroProps> = memo<HeroProps>(({title, lang = DEFAULT_LANG}) => {
     return (
         <div className={"flex flex-col-reverse md:flex-row justify-center md:justify-between"}>
             <div className={"md:w-3/4  mt-5 md:mt-0"}>
-                <div className={"text-center md:text-start"}>
-                    <b className={"text-[3rem] md:text-[4rem]"}>{title}</b>
+                <div className={"text-center md:text-start text-[3rem] md:text-[4rem] flex align-middle"}>
+                    <b className={" "}>{title}</b>
+                    <div className={"hi-title"}> 👋</div>
                 </div>
                 <div className={"w-full mt-5 md:ms-1"}>
                     <p>
                         {isLoading ? <Skeleton count={3}/> : (data?.shortBio[lang] || dictionary.hero.noBio)}
                     </p>
                     <div className={"my-3 flex"}>
-                        <span className="material-symbols-outlined">location_on</span>
+                        <span className={googleOutline.className}>location_on</span>
                         <b className={"w-1/2 md:w-1/4 ms-2"}>
                             {isLoading ? <Skeleton/> : (data?.city || dictionary.hero.noCity)}
                         </b>
                     </div>
                     <div className={"my-3 flex"}>
-                        <span className="material-symbols-outlined">bolt</span>
+                        <span className={googleOutline.className}>bolt</span>
                         <b className={"w-1/2 md:w-1/4 ms-2"}>
                             {isLoading ? <Skeleton/> : (data?.status[lang] || dictionary.hero.noStatus)}
                         </b>

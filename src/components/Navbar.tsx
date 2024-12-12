@@ -1,6 +1,7 @@
 import React, {FC, memo, useState} from 'react';
 import Image from "next/image"
 import Logo from "../app/images/icons/logo.svg"
+import Link from "next/link";
 
 type NavbarProps = {
     items: { href: string, text: string }[],
@@ -16,10 +17,10 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({items, downloadCV}) => {
 
     return (
         <nav className={"py-5 flex items-center justify-between"}>
-            <div className="logo">
+            <Link href={"/"} className="logo">
                 <Image src={Logo} alt="logo" className={"w-[4rem] md:w-[5vw] h-[4rem] md:h-[5vw]"} width={150}
                        height={150}/>
-            </div>
+            </Link>
             <div className="sm:hidden">
                 <div className="flex items-center justify-end h-16 sm:p-0">
                     <div className="flex items-center">

@@ -23,9 +23,9 @@ export default function RootLayout({
     return (
         <StoreProvider>
             <html lang={"en"}>
-            <head>
-                <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet"/>
-            </head>
+            {/*<head>*/}
+                {/*<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet"/>*/}
+            {/*</head>*/}
             <body
                 className={inria.className}
             >

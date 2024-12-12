@@ -35,7 +35,6 @@ body {
     }
 }
 
-
 .loader {
     border-bottom-color: transparent;
     border-top-color: var(--loader-color);
@@ -45,6 +44,24 @@ body {
     animation: spin 1s linear infinite;
 }
 
+
+.hi-title{
+    display: block;
+    animation: hi-sticker 1s linear infinite;
+    -webkit-animation: hi-sticker 1s ease-in-out infinite;
+}
+
+@keyframes hi-sticker {
+    0%{
+        transform: rotate(15deg);
+    }
+    50%{
+        transform: rotate(-45deg);
+    }
+    100%{
+        transform: rotate(15deg);
+    }
+}
 
 @keyframes spin {
     0% {
