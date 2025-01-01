@@ -21,6 +21,20 @@ const en = {
         noCity: "City not loaded",
         noStatus: "Status also :(",
     },
+    chat: {
+        config: {
+            title: 'Hi there! 👋',
+            subtitle: "Start a chat.",
+            footer: '',
+            getStarted: 'New Conversation',
+            inputPlaceholder: 'Type your question..',
+            closeButtonTooltip: "Close chat"
+        },
+        initialMessages: [
+            'Hi there! 👋',
+            'My name is Umid. What do you want to know about me?'
+        ]
+    },
 }
 
 export default en;

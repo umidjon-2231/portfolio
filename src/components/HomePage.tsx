@@ -12,7 +12,7 @@ interface HomePageProps {
 }
 
 const HomePage: FC<HomePageProps> = memo<HomePageProps>(({lang, info}) => {
-    const [dictionary, {language}] = useDictionary(lang);
+    const [dictionary, {language}] = useDictionary();
 
     const navItems = useMemo(() => [
         {href: "#about", text: dictionary.navbar.items.about},
