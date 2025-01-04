@@ -1,15 +1,25 @@
-import React, {FC, memo, useState} from 'react';
+import React, {FC, memo, useMemo, useState} from 'react';
 import Image from "next/image"
 import Logo from "../app/images/icons/logo.svg"
 import Link from "next/link";
+import {useDictionary} from "@/locales/hook";
+import {LanguageEnum} from "@/locales";
 
 type NavbarProps = {
-    items: { href: string, text: string }[],
-    downloadCV: string
+    lang?: LanguageEnum | null,
 }
 
-const Navbar: FC<NavbarProps> = memo<NavbarProps>(({items, downloadCV}) => {
+const Navbar: FC<NavbarProps> = memo<NavbarProps>(({lang}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [dictionary] = useDictionary(lang);
+
+    const items = useMemo(() => [
+        {href: "#about", text: dictionary.navbar.items.about},
+        {href: "#projects", text: dictionary.navbar.items.projects},
+        {href: "#testimonials", text: dictionary.navbar.items.testimonials},
+        {href: "#contact", text: dictionary.navbar.items.contact},
+    ], [dictionary])
+
 
     function toggleNavbar() {
         setIsOpen(!isOpen)
@@ -44,11 +54,13 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({items, downloadCV}) => {
             </div>
             <div className={"navigation md:flex hidden"}>
                 {items.map((i) => {
-                    return <a className={"dark:hover:text-[var(--foreground)] dark:text-gray-400"} key={i.text} href={i.href}>{i.text}</a>
+                    return <a className={"dark:hover:text-[var(--foreground)] dark:text-gray-400"} key={i.text}
+                              href={i.href}>{i.text}</a>
                 })}
                 <div>
-                    <a download={"Tojiboyev Umidjon's CV.pdf"} className={"dark:bg-white dark:text-gray-900 bg-gray-900 text-white p-2 rounded-xl"}
-                       href="/cv.pdf">{downloadCV}</a>
+                    <a download={"Tojiboyev Umidjon's CV.pdf"}
+                       className={"dark:bg-white dark:text-gray-900 bg-gray-900 text-white p-2 rounded-xl"}
+                       href="/cv.pdf">{dictionary.navbar.downloadCv}</a>
                 </div>
             </div>
             <div
@@ -67,8 +79,9 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({items, downloadCV}) => {
                             {i.text}</a>
                     })}
                     <div className={"mt-10 ms-2"}>
-                        <a download={"Tojiboyev Umidjon's CV.pdf"} className={"dark:bg-white dark:text-gray-900 bg-gray-900 text-white p-2 rounded-xl"}
-                           href="/cv.pdf">{downloadCV}</a>
+                        <a download={"Tojiboyev Umidjon's CV.pdf"}
+                           className={"dark:bg-white dark:text-gray-900 bg-gray-900 text-white p-2 rounded-xl"}
+                           href="/cv.pdf">{dictionary.navbar.downloadCv}</a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 "use client"
 import React, {FC, memo} from 'react';
-import {DEFAULT_LANG, LanguageEnum,} from "@/locales";
 import SocialLinks from "@/components/SocialLinks";
 import Avatar from "@/components/Avatar";
 import {googleOutline} from "@/app/fonts";
@@ -8,25 +7,23 @@ import {IPersonalInfo} from "@/db/scheme/personalInfo";
 import {useDictionary} from "@/locales/hook";
 
 interface HeroProps {
-    title: string;
-    lang?: LanguageEnum
     data: IPersonalInfo
 }
 
 const IMAGE_SIZE = 300
-const Hero: FC<HeroProps> = memo<HeroProps>(({title, lang = DEFAULT_LANG, data}) => {
-    const [dictionary] = useDictionary(lang)
+const Hero: FC<HeroProps> = memo<HeroProps>(({data}) => {
+    const [dictionary, {language}] = useDictionary()
 
     return (
         <div className={"flex flex-col-reverse md:flex-row justify-center md:justify-between"}>
             <div className={"md:w-3/4  mt-5 md:mt-0"}>
                 <div className={"text-center md:text-start text-[3rem] md:text-[4rem] flex align-middle"}>
-                    <b className={" "}>{title}</b>
+                    <b className={" "}>{dictionary.hero.title}</b>
                     <div className={"hi-title"}> 👋</div>
                 </div>
                 <div className={"w-full mt-5 md:ms-1"}>
                     <p>
-                        {(data?.shortBio[lang] || dictionary.hero.noBio)}
+                        {(data?.shortBio[language] || dictionary.hero.noBio)}
                     </p>
                     <div className={"my-3 flex"}>
                         <span className={googleOutline.className}>location_on</span>
@@ -37,7 +34,7 @@ const Hero: FC<HeroProps> = memo<HeroProps>(({title, lang = DEFAULT_LANG, data})
                     <div className={"my-3 flex"}>
                         <span className={googleOutline.className}>bolt</span>
                         <b className={"w-1/2 md:w-1/4 ms-2"}>
-                            {(data?.status[lang] || dictionary.hero.noStatus)}
+                            {(data?.status[language] || dictionary.hero.noStatus)}
                         </b>
                     </div>
                     <div className={"w-full mt-10"}>
