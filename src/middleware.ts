@@ -22,11 +22,7 @@ function getLocale(request: NextRequest): string | undefined {
 export function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     if (
-        [
-            '/manifest.json',
-            '/favicon.ico',
-            '/cv.pdf',
-        ].includes(pathname)
+        pathname.match(/\/(.+)\.(.+)/)?.index !== undefined
     ) return
     console.log(pathname)
     const pathnameIsMissingLocale = Object.keys(dictionary).every(
@@ -36,7 +32,7 @@ export function middleware(request: NextRequest) {
 
     if (pathnameIsMissingLocale) {
         const locale = getLocale(request);
-
+        if (locale==="en") return
         return NextResponse.redirect(
             new URL(
                 `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,

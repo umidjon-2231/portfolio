@@ -1,0 +1,12 @@
+# *
+User-agent: *
+Allow: /
+Allow: /ru
+Allow: /en
+Disallow: /admin
+
+# Host
+Host: https://tojiboyevumidjon.uz
+
+# Sitemaps
+Sitemap: https://tojiboyevumidjon.uz/sitemap.xml

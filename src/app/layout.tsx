@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     description: "Portfolio of Umidjon Tojiboyev. Designed and coded by himself!",
     keywords: ["Umid", "Umidjon", "Tojiboyev", "Umidjon Tojiboyev" ,
         "portfolio", "web developer", "react", "typescript", "next.js", "tashkent", "uzbekistan"],
+    creator: "Umidjon Tojiboyev",
+    alternates: {
+        canonical: "https://tojiboyevumidjon.uz",
+        languages: {
+            'en': 'https://tojiboyevumidjon.uz/en',
+            'ru': 'https://tojiboyevumidjon.uz/ru',
+        },
+    }
 };
 
 const inria = Inria_Sans({weight: ["300", "400", "700"], subsets: ["latin"]})
