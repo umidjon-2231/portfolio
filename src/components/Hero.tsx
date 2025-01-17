@@ -1,10 +1,11 @@
 "use client"
 import React, {FC, memo} from 'react';
-import SocialLinks from "@/components/SocialLinks";
-import Avatar from "@/components/Avatar";
+import SocialLinks from "@/components/UI/SocialLinks";
+import Avatar from "@/components/UI/Avatar";
 import {googleOutline} from "@/app/fonts";
 import {IPersonalInfo} from "@/db/scheme/personalInfo";
 import {useDictionary} from "@/locales/hook";
+import BlurBg from "@/components/UI/BlurBg";
 
 interface HeroProps {
     data: IPersonalInfo
@@ -16,10 +17,11 @@ const Hero: FC<HeroProps> = memo<HeroProps>(({data}) => {
 
     return (
         <div className={"flex flex-col-reverse md:flex-row justify-center md:justify-between"}>
-            <div className={"md:w-3/4  mt-5 md:mt-0"}>
+            <div className={"md:w-3/4 mt-5 md:mt-0 relative shadow rounded-3xl p-5"}>
+                <BlurBg/>
                 <div className={"text-center md:text-start text-[3rem] md:text-[4rem] flex align-middle"}>
                     <b className={" "}>{dictionary.hero.title}</b>
-                    <div className={"hi-title"}> 👋</div>
+                    {/*<div className={"hi-title"}> 👋</div>*/}
                 </div>
                 <div className={"w-full mt-5 md:ms-1"}>
                     <p>
@@ -42,7 +44,7 @@ const Hero: FC<HeroProps> = memo<HeroProps>(({data}) => {
                     </div>
                 </div>
             </div>
-            <div className={"md:w-1/2 flex justify-center md:justify-end"}>
+            <div className={"md:w-1/2 flex justify-center md:justify-end items-center"}>
                 <Avatar src={data?.avatar ? "/api/attachment/" + data.avatar : ""} image_size={IMAGE_SIZE}/>
             </div>
         </div>

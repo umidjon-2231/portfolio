@@ -4,6 +4,7 @@ import Logo from "../app/images/icons/logo.svg"
 import Link from "next/link";
 import {useDictionary} from "@/locales/hook";
 import {LanguageEnum} from "@/locales";
+import BlurBg from "@/components/UI/BlurBg";
 
 type NavbarProps = {
     lang?: LanguageEnum | null,
@@ -27,11 +28,12 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({lang}) => {
 
     return (
         <nav className={"py-5 flex items-center justify-between"}>
-            <Link href={"/"} className="logo">
+            <Link href={"/"} className="logo relative">
+                <BlurBg/>
                 <Image src={Logo} alt="logo" className={"w-[4rem] md:w-[5vw] h-[4rem] md:h-[5vw]"} width={150}
                        height={150}/>
             </Link>
-            <div className="sm:hidden">
+            <div className="md:hidden">
                 <div className="flex items-center justify-end h-16 sm:p-0">
                     <div className="flex items-center">
                         <button
@@ -52,7 +54,8 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({lang}) => {
                     </div>
                 </div>
             </div>
-            <div className={"navigation md:flex hidden"}>
+            <div className={"navigation md:flex hidden relative p-5"}>
+                <BlurBg/>
                 {items.map((i) => {
                     return <a className={"dark:hover:text-[var(--foreground)] dark:text-gray-400"} key={i.text}
                               href={i.href}>{i.text}</a>

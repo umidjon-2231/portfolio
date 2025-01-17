@@ -7,6 +7,7 @@ import {StoreProvider} from "@/components/StoreProvider";
 import 'react-loading-skeleton/dist/skeleton.css'
 import {SkeletonTheme} from "react-loading-skeleton";
 import Chat from "@/components/Chat";
+import BackgroundAnimation from "@/components/UI/BackgroundAnimation";
 
 export const metadata: Metadata = {
     title: "Umid's portfolio",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
         "portfolio", "web developer", "react", "typescript", "next.js", "tashkent", "uzbekistan"],
     creator: "Umidjon Tojiboyev",
     alternates: {
-        canonical: "https://tojiboyevumidjon.uz",
+        canonical: "https://tojiboyevumidjon.uz/",
         languages: {
             'en': 'https://tojiboyevumidjon.uz/en',
             'ru': 'https://tojiboyevumidjon.uz/ru',
@@ -41,6 +42,7 @@ export default function RootLayout({
                 {children}
             </SkeletonTheme>
             <Chat/>
+            <BackgroundAnimation/>
             {/*</Loading>*/}
             </body>
             </html>

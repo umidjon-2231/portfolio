@@ -12,5 +12,12 @@ export const MainContext = createContext<MainContextType>({
 
 export const StoreProvider = ({children}: PropsWithChildren) => {
     const params = useParams()
-    return <MainContext value={{lang: (params.lang as LanguageEnum) ?? "en"}}>{children}</MainContext>;
+
+    return (
+        <MainContext value={{lang: (params.lang as LanguageEnum) ?? "en"}}>
+            <>
+                {children}
+            </>
+        </MainContext>
+    );
 };
