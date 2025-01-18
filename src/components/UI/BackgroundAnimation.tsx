@@ -1,11 +1,14 @@
 "use client"
-import React, {useEffect, useState} from 'react';
+import React, {use, useCallback, useEffect, useState} from 'react';
 import Particles, {initParticlesEngine} from "@tsparticles/react";
 import {loadSlim} from "@tsparticles/slim";
 import {ISourceOptions} from "@tsparticles/engine";
+import {MainContext} from "@/components/StoreProvider";
 
 const BackgroundAnimation = () => {
     const [init, setInit] = useState<boolean>(false)
+    const {theme} = use(MainContext)
+
     useEffect(() => {
         initParticlesEngine(async (engine) => {
             await loadSlim(engine);
@@ -13,6 +16,11 @@ const BackgroundAnimation = () => {
             setInit(true)
         });
     }, []);
+
+    const getVariable = useCallback((name: string) => {
+        console.log(theme)
+        return getComputedStyle(document.documentElement).getPropertyValue(name);
+    }, [theme])
 
     const options: ISourceOptions = {
         background: {
@@ -37,20 +45,20 @@ const BackgroundAnimation = () => {
                     quantity: 4,
                 },
                 repulse: {
-                    distance: 200,
+                    distance: 100,
                     duration: 0.4,
                 },
             },
         },
         particles: {
             color: {
-                value: "#fff",
+                value: getVariable("--foreground"),
             },
             links: {
-                color: "#fff",
+                color: getVariable("--foreground"),
                 distance: 150,
                 enable: true,
-                opacity: 0.5,
+                opacity: 0.7,
                 width: 1,
             },
             move: {
@@ -60,7 +68,7 @@ const BackgroundAnimation = () => {
                     default: "bounce",
                 },
                 random: false,
-                speed: 6,
+                speed: 1,
                 straight: false,
             },
             number: {
@@ -68,16 +76,16 @@ const BackgroundAnimation = () => {
                     enable: true,
                 },
                 limit: {
-                    mode: "delete",
-                    value: 200
+                    mode: "wait",
+                    value: 300
                 },
-                value: 100,
+                value: 150,
             },
             opacity: {
-                value: 0.5,
+                value: 0.7,
             },
             shape: {
-                type: "circle",
+                type: ["circle", "triangle", "square"],
             },
             size: {
                 value: {min: 1, max: 5},
@@ -85,9 +93,11 @@ const BackgroundAnimation = () => {
         },
         detectRetina: true,
     }
+
     if (init) {
         return <Particles options={options} className={"fixed -z-50"}/>
     }
+
     return <></>
 
 };

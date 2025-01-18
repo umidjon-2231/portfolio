@@ -16,7 +16,6 @@ const Chat = () => {
                     ...(dictionary.chat.config),
                 },
             },
-
         });
     }, [dictionary]);
     return (<></>);

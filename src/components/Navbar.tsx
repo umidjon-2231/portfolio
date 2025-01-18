@@ -5,6 +5,7 @@ import Link from "next/link";
 import {useDictionary} from "@/locales/hook";
 import {LanguageEnum} from "@/locales";
 import BlurBg from "@/components/UI/BlurBg";
+import CVButton from "@/components/UI/CVButton";
 
 type NavbarProps = {
     lang?: LanguageEnum | null,
@@ -29,7 +30,6 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({lang}) => {
     return (
         <nav className={"py-5 flex items-center justify-between"}>
             <Link href={"/"} className="logo relative">
-                <BlurBg/>
                 <Image src={Logo} alt="logo" className={"w-[4rem] md:w-[5vw] h-[4rem] md:h-[5vw]"} width={150}
                        height={150}/>
             </Link>
@@ -57,18 +57,16 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({lang}) => {
             <div className={"navigation md:flex hidden relative p-5"}>
                 <BlurBg/>
                 {items.map((i) => {
-                    return <a className={"dark:hover:text-[var(--foreground)] dark:text-gray-400"} key={i.text}
+                    return <a className={"dark:hover:text-[var(--foreground)] dark:text-gray-500"} key={i.text}
                               href={i.href}>{i.text}</a>
                 })}
                 <div>
-                    <a download={"Tojiboyev Umidjon's CV.pdf"}
-                       className={"dark:bg-white dark:text-gray-900 bg-gray-900 text-white p-2 rounded-xl"}
-                       href="/cv.pdf">{dictionary.navbar.downloadCv}</a>
+                    <CVButton/>
                 </div>
             </div>
             <div
-                className={`fixed inset-0 z-[1001] transition-transform duration-500 transform ${isOpen ? 'translate-x-1/2' : 'translate-x-[100%]'} bg-[var(--background)] sm:hidden`}>
-                <div className={"flex justify-start p-5"} onClick={toggleNavbar}>
+                className={`fixed inset-0 z-[1001] transition-transform duration-500 transform ${isOpen ? 'translate-x-1/2' : 'translate-x-[100%]'} bg-[var(--background)] md:hidden border-l border-[var(--secondary)]`}>
+                <div className={"flex justify-start p-5 cursor-pointer"} onClick={toggleNavbar}>
                     <svg className="block h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
@@ -82,9 +80,7 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({lang}) => {
                             {i.text}</a>
                     })}
                     <div className={"mt-10 ms-2"}>
-                        <a download={"Tojiboyev Umidjon's CV.pdf"}
-                           className={"dark:bg-white dark:text-gray-900 bg-gray-900 text-white p-2 rounded-xl"}
-                           href="/cv.pdf">{dictionary.navbar.downloadCv}</a>
+                        <CVButton/>
                     </div>
                 </div>
             </div>

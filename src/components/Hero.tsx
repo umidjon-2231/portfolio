@@ -17,7 +17,7 @@ const Hero: FC<HeroProps> = memo<HeroProps>(({data}) => {
 
     return (
         <div className={"flex flex-col-reverse md:flex-row justify-center md:justify-between"}>
-            <div className={"md:w-3/4 mt-5 md:mt-0 relative shadow rounded-3xl p-5"}>
+            <div className={"md:w-3/4 mt-5 md:mt-0 relative shadow rounded-3xl p-5 px-8"}>
                 <BlurBg/>
                 <div className={"text-center md:text-start text-[3rem] md:text-[4rem] flex align-middle"}>
                     <b className={" "}>{dictionary.hero.title}</b>

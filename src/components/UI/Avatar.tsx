@@ -17,7 +17,7 @@ const Avatar: FC<AvatarProps> = memo<AvatarProps>(({src, image_size: IMAGE_SIZE}
 
     return (
         <div
-            className={" md:me-3 border-4 border-solid box-content dark:border-white border-gray-200 rounded-full"}
+            className={" md:me-3 border-4 border-solid box-content border-[var(--secondary)] rounded-full"}
             style={{width: IMAGE_SIZE, height: IMAGE_SIZE,}}>
             {loading &&
                 <Skeleton borderRadius={999} width={IMAGE_SIZE} height={IMAGE_SIZE}
