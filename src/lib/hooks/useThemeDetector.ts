@@ -2,17 +2,22 @@ import { useState, useEffect } from "react";
 
 const useThemeDetector = () => {
     const getCurrentTheme = () =>
-        window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        window?.matchMedia("(prefers-color-scheme: dark)")?.matches ? "dark" : "light";
 
     const [theme, setTheme] = useState<"dark" | "light">(getCurrentTheme());
 
     useEffect(() => {
-        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        if (window){
 
-        const handleThemeChange = () => setTheme(getCurrentTheme());
+            const mediaQuery = window?.matchMedia("(prefers-color-scheme: dark)");
 
-        mediaQuery.addEventListener("change", handleThemeChange);
-        return () => mediaQuery.removeEventListener("change", handleThemeChange);
+            const handleThemeChange = () => setTheme(getCurrentTheme());
+
+            mediaQuery.addEventListener("change", handleThemeChange);
+            return () => mediaQuery.removeEventListener("change", handleThemeChange);
+        }else {
+            setTheme("light");
+        }
     }, []);
 
     return theme;
