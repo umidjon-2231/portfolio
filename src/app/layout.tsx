@@ -7,12 +7,12 @@ import {StoreProvider} from "@/components/StoreProvider";
 import 'react-loading-skeleton/dist/skeleton.css'
 import {SkeletonTheme} from "react-loading-skeleton";
 import Chat from "@/components/Chat";
-import BackgroundAnimation from "@/components/UI/BackgroundAnimation";
+import NoPrerender from "@/components/NoPrerender";
 
 export const metadata: Metadata = {
     title: "Umid's portfolio",
     description: "Portfolio of Umidjon Tojiboyev. Designed and coded by himself!",
-    keywords: ["Umid", "Umidjon", "Tojiboyev", "Umidjon Tojiboyev" ,
+    keywords: ["Umid", "Umidjon", "Tojiboyev", "Umidjon Tojiboyev",
         "portfolio", "web developer", "react", "typescript", "next.js", "tashkent", "uzbekistan"],
     creator: "Umidjon Tojiboyev",
     alternates: {
@@ -42,7 +42,7 @@ export default function RootLayout({
                 {children}
             </SkeletonTheme>
             <Chat/>
-            <BackgroundAnimation/>
+            <NoPrerender/>
             {/*</Loading>*/}
             </body>
             </html>

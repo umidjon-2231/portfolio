@@ -19,7 +19,10 @@ const BackgroundAnimation = () => {
 
     const getVariable = useCallback((name: string) => {
         console.log(theme)
-        return getComputedStyle(document.documentElement).getPropertyValue(name);
+        if (window){
+            return getComputedStyle(document.documentElement).getPropertyValue(name);
+        }
+        return "#000"
     }, [theme])
 
     const options: ISourceOptions = {
