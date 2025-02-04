@@ -18,11 +18,10 @@ const BackgroundAnimation = () => {
     }, []);
 
     const getVariable = useCallback((name: string) => {
-        console.log(theme)
-        if (window){
+        if (window) {
             return getComputedStyle(document.documentElement).getPropertyValue(name);
         }
-        return "#000"
+        return theme === "dark" ? "#fff" : "#000"
     }, [theme])
 
     const options: ISourceOptions = {

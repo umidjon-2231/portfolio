@@ -1,19 +1,22 @@
-import React, {FC, memo, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Skeleton from "react-loading-skeleton";
 import Image from "next/image";
-import DEFAULT_USER_ICON from "@/app/images/icons/user_circle.svg";
 
 interface AvatarProps {
-    src: string
+    src?: string
     image_size: number
 }
 
-const Avatar: FC<AvatarProps> = memo<AvatarProps>(({src, image_size: IMAGE_SIZE}) => {
+const AVATAR_URL = "/api/avatar"
+
+const Avatar: FC<AvatarProps> = ({src, image_size: IMAGE_SIZE}) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setLoading(true);
     }, [src, IMAGE_SIZE])
+
+    console.count("Avatar render")
 
     return (
         <div
@@ -28,13 +31,13 @@ const Avatar: FC<AvatarProps> = memo<AvatarProps>(({src, image_size: IMAGE_SIZE}
                 className={"rounded-full"}
                 hidden={loading}
                 onLoad={() => setLoading(false)}
-                src={src || DEFAULT_USER_ICON.src}
+                src={src ?? AVATAR_URL}
                 alt={"my photo"}
                 width={IMAGE_SIZE} height={IMAGE_SIZE} placeholder={"empty"}
             />
         </div>
     );
-});
+};
 
 Avatar.displayName = "Avatar"
 export default Avatar;

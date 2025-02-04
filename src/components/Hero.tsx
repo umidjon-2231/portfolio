@@ -45,7 +45,7 @@ const Hero: FC<HeroProps> = memo<HeroProps>(({data}) => {
                 </div>
             </div>
             <div className={"md:w-1/2 flex justify-center md:justify-end items-center"}>
-                <Avatar src={data?.avatar ? "/api/attachment/" + data.avatar : ""} image_size={IMAGE_SIZE}/>
+                <Avatar image_size={IMAGE_SIZE}/>
             </div>
         </div>
     );

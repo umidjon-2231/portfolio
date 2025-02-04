@@ -20,5 +20,5 @@ export const DEFAULT_INFO: IPersonalInfo = {
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    avatar: new Types.ObjectId("671fd632c7dad681bd75c3b9"),
+    avatar: new Types.ObjectId("67a2008fba86f4cb9affdb75"),
 }
