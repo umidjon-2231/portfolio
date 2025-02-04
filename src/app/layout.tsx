@@ -1,5 +1,5 @@
 import type {Metadata} from "next";
-import '@n8n/chat/style.css';
+import './styles/chat.css';
 import "./styles/globals.css";
 import React from "react";
 import {Inria_Sans} from "next/font/google"

@@ -27,7 +27,6 @@ const Avatar: FC<AvatarProps> = ({src, image_size: IMAGE_SIZE}) => {
             {/*}*/}
             <Image
                 priority
-                loading={"eager"}
                 className={"rounded-full"}
                 // hidden={loading}
                 // onLoad={() => setLoading(false)}
