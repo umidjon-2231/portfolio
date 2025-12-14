@@ -5,15 +5,9 @@ services:
       dockerfile: Dockerfile
     container_name: portfolio
     ports:
-      - "${PORT:-3000}:3000"
+      - "${CONTAINER_PORT:-3000}:3000"
     environment:
       - NODE_ENV=production
     env_file:
       - .env
     restart: unless-stopped
-    networks:
-      - portfolio-network
-
-networks:
-  portfolio-network:
-    driver: bridge
