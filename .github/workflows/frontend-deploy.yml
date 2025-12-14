@@ -34,7 +34,7 @@ jobs:
             echo Locating path: "$PROJECT_PATH"
             cd $PROJECT_PATH
             git pull
-            docker build -t $NAME .
+            docker compose build
   run:
     runs-on: ubuntu-22.04
     needs: [test, build]
@@ -52,6 +52,4 @@ jobs:
           script: |
             echo Locating path: "$PROJECT_PATH"
             cd $PROJECT_PATH
-            docker stop $NAME || true
-            docker rm $NAME || true
-            docker run -d --restart unless-stopped -p 3015:3000 --name $NAME $NAME
+            docker compose up -d
