@@ -1,6 +1,5 @@
 import {PropsWithChildren} from "react";
 import type {Metadata} from "next";
-import {LanguageEnum} from "@/locales";
 
 export const metadata: Metadata = {
     title: "Umid's portfolio",
@@ -14,18 +13,8 @@ export const metadata: Metadata = {
     }
 };
 
-interface PageProps extends PropsWithChildren {
-    params: Promise<{ lang: LanguageEnum }>
-}
-
-const Layout = async (props: PageProps) => {
-    // const params = await props.params;
-
-    return <div>
-        {/*<MainContext value={{lang: params.lang}}>*/}
-        {props.children}
-        {/*</MainContext>*/}
-    </div>;
+const Layout = async ({children}: PropsWithChildren) => {
+    return children;
 };
 
 export default Layout;
