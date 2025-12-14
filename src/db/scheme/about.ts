@@ -1,15 +1,13 @@
-import {model, models, Schema} from 'mongoose';
-import {ObjectId} from "mongodb";
-
+import {model, models, Schema, ObjectId} from 'mongoose';
 export interface IAbout {
-    avatar: typeof ObjectId;
+    avatar: ObjectId;
     bio: Record<string, string>
     createdAt: Date;
 }
 
 const AboutSchema = new Schema<IAbout>({
     avatar: {
-        type: ObjectId,
+        type: Schema.Types.ObjectId,
         required: true,
         ref: "Attachment"
     },

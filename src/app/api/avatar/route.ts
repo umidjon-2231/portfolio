@@ -21,7 +21,7 @@ export const GET = async () => {
             })
         }
 
-        return new Response(attachment.content, {
+        return new Response(new Uint8Array(attachment.content), {
             headers: {
                 "Content-Type": attachment.contentType,
             }
