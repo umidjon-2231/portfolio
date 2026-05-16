@@ -1,23 +1,10 @@
-"use client"
-import React, {FC, PropsWithChildren} from 'react';
-import {AdminContext, sessionStorageTokenKey} from './context';
-import AdminAuth from "@/components/admin/AdminAuth";
-import {ReCaptchaProvider} from "next-recaptcha-v3";
+import {FC, PropsWithChildren} from 'react';
 
-
+// TEMPORARY: the old fakeable sessionStorage/email-OTP gate was removed
+// (no email OTP — auth is password+JWT). Real protection is added in
+// Phase 2 (T15: JWT gate in src/proxy.ts) and Phase 3 (T17: /admin/login).
 const Layout: FC<PropsWithChildren> = ({children}) => {
-    // NOTE: temporary client-storage gate — replaced by JWT cookie auth in Phase 2/3 (T14/T17).
-    const [token] = React.useState<string | null>(() =>
-        typeof window === "undefined" ? null : sessionStorage.getItem(sessionStorageTokenKey)
-    );
-
-    return (
-        <AdminContext.Provider value={{token}}>
-            <ReCaptchaProvider>
-                {token ? children : <AdminAuth/>}
-            </ReCaptchaProvider>
-        </AdminContext.Provider>
-    );
+    return <>{children}</>;
 };
 
 export default Layout;
