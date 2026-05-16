@@ -8,22 +8,19 @@ type Params = {
 export const GET = async (_req: Request, context: { params: Promise<Params> }) => {
     try {
         await dbConnect();
-        console.log(`Request to attachment ${(await context.params).id}`)
-        const attachment = await Attachment.findById((await context.params).id)
+        const {id} = await context.params;
+        const attachment = await Attachment.findById(id)
         if (!attachment) {
-            return new Response(null, {
-                status: 404
-            })
+            return new Response(null, {status: 404})
         }
-        return new Response(attachment.content, {
+        return new Response(new Uint8Array(attachment.content), {
             headers: {
                 "Content-Type": attachment.contentType,
+                "Cache-Control": "public, max-age=31536000, immutable",
             }
         })
     } catch (e) {
         console.error(e)
-        return Response.json({message: "Internal server error"}, {
-            status: 500
-        })
+        return Response.json({message: "Internal server error"}, {status: 500})
     }
 }

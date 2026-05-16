@@ -4,6 +4,8 @@ import {NextResponse} from "next/server";
 import {match as matchLocale} from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import {DEFAULT_LANG, dictionary} from "@/locales";
+import {verifySession} from "@/lib/auth/jwt";
+import {ADMIN_COOKIE} from "@/lib/auth/constants";
 
 function getLocale(request: NextRequest): string | undefined {
     const negotiatorHeaders: Record<string, string> = {};
@@ -18,11 +20,23 @@ function getLocale(request: NextRequest): string | undefined {
     return matchLocale(languages, locales, DEFAULT_LANG);
 }
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     if (
         pathname.match(/\/(.+)\.(.+)/)?.index !== undefined
     ) return
+
+    // Admin gate — runs before i18n. The admin UI is English-only, so it
+    // is never locale-redirected. /admin/login is public.
+    if (pathname.startsWith("/admin")) {
+        if (pathname === "/admin/login") return;
+        const session = await verifySession(request.cookies.get(ADMIN_COOKIE)?.value);
+        if (!session) {
+            return NextResponse.redirect(new URL("/admin/login", request.url));
+        }
+        return;
+    }
+
     const pathnameIsMissingLocale = Object.keys(dictionary).every(
         (locale) =>
             !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,

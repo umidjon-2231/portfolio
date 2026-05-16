@@ -24,6 +24,7 @@ export const GET = async () => {
         return new Response(new Uint8Array(attachment.content), {
             headers: {
                 "Content-Type": attachment.contentType,
+                "Cache-Control": "public, max-age=31536000, immutable",
             }
         })
 
