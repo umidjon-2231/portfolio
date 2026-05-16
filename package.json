@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "db:seed": "tsx --env-file=.env src/db/seed/run.ts"
   },
   "dependencies": {
     "@date-fns/tz": "^1.1.2",
@@ -28,7 +29,8 @@
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "react-loading-skeleton": "^3.5.0",
-    "react-social-icons": "^6.18.0"
+    "react-social-icons": "^6.18.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
@@ -41,6 +43,7 @@
     "eslint-config-next": "16.2.6",
     "postcss": "^8.5.14",
     "tailwindcss": "^4.3.0",
+    "tsx": "^4.22.0",
     "typescript": "^5.7.2"
   },
   "pnpm": {
