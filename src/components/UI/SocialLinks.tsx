@@ -15,7 +15,7 @@ const SocialLinks: FC<SocialLinksProps> = memo<SocialLinksProps>((links) => {
                                 network={key}
                                 href={value}
                                 target={"_blank"}
-                        className={"border border-solid border-[var(--foreground)] rounded-full"}
+                        className={"border border-solid border-(--foreground) rounded-full"}
                                 style={{width: "3rem", height: "3rem"}}
                     />
                 </div>

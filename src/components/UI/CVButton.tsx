@@ -6,7 +6,7 @@ const CvButton = () => {
 
     return (
         <a download={"Tojiboyev Umidjon's CV.pdf"}
-           className={"bg-[var(--secondary)] hover:bg-[var(--foreground)] dark:text-gray-900 text-white p-2 rounded-xl"}
+           className={"bg-(--secondary) hover:bg-(--foreground) dark:text-gray-900 text-white p-2 rounded-xl"}
            href="/cv.pdf">{dictionary.navbar.downloadCv}</a>
     );
 };

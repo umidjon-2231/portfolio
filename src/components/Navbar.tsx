@@ -30,7 +30,7 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({lang}) => {
     return (
         <nav className={"py-5 flex items-center justify-between"}>
             <Link href={"/"} className="logo relative">
-                <Image src={Logo} alt="logo" className={"w-[4rem] md:w-[5vw] h-[4rem] md:h-[5vw]"} width={150}
+                <Image src={Logo} alt="logo" className={"w-16 md:w-[5vw] h-16 md:h-[5vw]"} width={150}
                        height={150}/>
             </Link>
             <div className="md:hidden">
@@ -38,7 +38,7 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({lang}) => {
                     <div className="flex items-center">
                         <button
                             type="button"
-                            className="inline-flex bg-blur items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                            className="inline-flex bg-blur items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-white"
                             aria-controls="mobile-menu"
                             aria-expanded="false"
                             onClick={toggleNavbar}
@@ -57,7 +57,7 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({lang}) => {
             <div className={"navigation md:flex hidden relative p-5"}>
                 <BlurBg/>
                 {items.map((i) => {
-                    return <a className={"dark:hover:text-[var(--foreground)] dark:text-gray-500"} key={i.text}
+                    return <a className={"dark:hover:text-(--foreground) dark:text-gray-500"} key={i.text}
                               href={i.href}>{i.text}</a>
                 })}
                 <div>
@@ -65,7 +65,7 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({lang}) => {
                 </div>
             </div>
             <div
-                className={`fixed inset-0 z-[1001] transition-transform duration-500 transform ${isOpen ? 'translate-x-1/2' : 'translate-x-[100%]'} bg-[var(--background)] md:hidden border-l border-[var(--secondary)]`}>
+                className={`fixed inset-0 z-1001 transition-transform duration-500 transform ${isOpen ? 'translate-x-1/2' : 'translate-x-full'} bg-(--background) md:hidden border-l border-(--secondary)`}>
                 <div className={"flex justify-start p-5 cursor-pointer"} onClick={toggleNavbar}>
                     <svg className="block h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +76,7 @@ const Navbar: FC<NavbarProps> = memo<NavbarProps>(({lang}) => {
                 <div className="px-2 pt-2 pb-3">
                     {items.map(i => {
                         return <a key={i.text} href={i.href}
-                                  className="text-[var(--foreground)] dark:text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base">
+                                  className="text-(--foreground) dark:text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base">
                             {i.text}</a>
                     })}
                     <div className={"mt-10 ms-2"}>

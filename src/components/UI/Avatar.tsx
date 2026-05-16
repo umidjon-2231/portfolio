@@ -19,7 +19,7 @@ const Avatar: FC<AvatarProps> = ({src, image_size: IMAGE_SIZE}) => {
 
     return (
         <div
-            className={" md:me-3 border-4 border-solid box-content relative border-[var(--secondary)] rounded-full"}
+            className={" md:me-3 border-4 border-solid box-content relative border-(--secondary) rounded-full"}
             style={{width: IMAGE_SIZE, height: IMAGE_SIZE,}}>
             {/*{loading &&*/}
             {/*    <Skeleton borderRadius={999} width={IMAGE_SIZE} height={IMAGE_SIZE}*/}
