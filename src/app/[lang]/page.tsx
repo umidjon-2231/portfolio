@@ -5,13 +5,15 @@ import axios from "axios";
 type PageProps = object
 
 const Page: FC<PageProps> = async () => {
-    try{
+    let info = null;
+    try {
         const req = await axios.get(process.env.DOMAIN + "/api/info")
-        return <HomePage info={(req.data).data}/>
-    }catch (e) {
+        info = req.data?.data;
+    } catch (e) {
         console.log(e)
-        return <div>Something went wrong!</div>
     }
+    if (!info) return <div>Something went wrong!</div>;
+    return <HomePage info={info}/>;
 };
 
 export default Page;
