@@ -4,6 +4,7 @@ export interface IAttachment {
     name: string,
     contentType: string,
     size: number,
+    category?: string,
     createdAt: Date
     content: Buffer
 }
@@ -20,6 +21,10 @@ const AttachmentSchema = new Schema<IAttachment>({
     size: {
         type: Number,
         required: true,
+    },
+    category: {
+        type: String,
+        trim: true,
     },
     createdAt: {
         type: Date,
