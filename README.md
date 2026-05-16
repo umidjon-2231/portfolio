@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Umidjon Tojiboyev — Portfolio
 
-## Getting Started
+Personal portfolio with a fully admin-editable, trilingual (EN / RU / UZ)
+content layer and a motion-led ("Kinetic Motion") public site.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router) · **React 19** · **TypeScript**
+- **Tailwind CSS v4** (CSS-first theme) · **Motion** (Framer Motion)
+- **MongoDB** + **Mongoose 9** · **Zod** validation
+- Auth: single admin **password → JWT** in an httpOnly cookie (`jose` + `bcryptjs`)
+- i18n: custom locale routing (`/` = en, `/ru`, `/uz`) via `src/proxy.ts`
+- pnpm · Docker (standalone) · GitHub Actions
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+cp .env.example .env        # then fill the values
+pnpm db:seed                # one-shot import of INFORMATION.md content
+pnpm dev                    # http://localhost:3000  ·  admin: /admin
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Generating the admin password hash
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dlx tsx -e "import b from 'bcryptjs';console.log(b.hashSync('YOUR_PASSWORD',12))"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Put the output in `ADMIN_PASSWORD_HASH` and set a long random `JWT_SECRET`.
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Script          | Purpose                                            |
+|-----------------|----------------------------------------------------|
+| `pnpm dev`      | Dev server                                         |
+| `pnpm build`    | Production build (`postbuild` regenerates sitemap) |
+| `pnpm start`    | Run the build (`node .next/standalone/server.js`)  |
+| `pnpm lint`     | ESLint 9 (flat config)                             |
+| `pnpm db:seed`  | Idempotent seed from `INFORMATION.md`              |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Admin dashboard
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`/admin` (password-gated by `src/proxy.ts` + a server-side session check).
+Every portfolio domain is editable, each text field in EN/RU/UZ
+(RU/UZ fall back to EN). Singletons (Profile, Social Proof) upsert;
+collections support create / edit / delete / drag-order.
 
-## Deploy on Vercel
+### Adding a new content domain (4 steps, no new infra)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Schema** — `src/db/scheme/<name>.ts` (use `LocalizedStringSchema` from
+   `_shared.ts` for trilingual fields).
+2. **Service** — add one `createCrudService` line + register it in
+   `src/db/service/index.ts` (`services` map).
+3. **Validation** — add a Zod schema in `src/lib/validation/index.ts`
+   (`validators` map, same key).
+4. **Admin UI** — add an entry to `DOMAINS` in `src/lib/admin/config.ts`
+   and a field descriptor array in `src/lib/admin/fields.ts`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The generic `/api/admin/[domain]` API and `/admin/[slug]` editor pick it
+up automatically. Surface it on the public site by adding a section
+component under `src/components/sections/`.
+
+## Deployment
+
+Push to `master` → GitHub Actions: install (pnpm, frozen lockfile) →
+lint → build → SSH to the host → `docker compose build && up -d`
+(Next.js standalone output, Node 20).
+
+Run `pnpm db:seed` once against the production database after the first
+deploy. Attachments (avatar / project covers) are stored in MongoDB so
+they survive immutable redeploys; `public/cv.pdf` stays a static asset.
