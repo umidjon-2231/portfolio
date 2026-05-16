@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "eslint .",
     "db:seed": "tsx --env-file=.env src/db/seed/run.ts"
@@ -15,14 +16,12 @@
     "@formatjs/intl-localematcher": "^0.5.9",
     "@n8n/chat": "^0.27.1",
     "@next/third-parties": "^16.2.6",
-    "@tsparticles/engine": "^3.7.1",
-    "@tsparticles/react": "^3.0.0",
-    "@tsparticles/slim": "^3.7.1",
     "axios": "^1.16.1",
     "bcryptjs": "^3.0.3",
     "date-fns": "^4.1.0",
     "jose": "^6.2.3",
     "mongoose": "^9.6.2",
+    "motion": "^12.38.0",
     "nanoid": "^5.0.9",
     "negotiator": "^1.0.0",
     "next": "16.2.6",

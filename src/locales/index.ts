@@ -1,5 +1,6 @@
 import en from "./en";
 import ru from "./ru";
+import uz from "./uz";
 
 export type LanguageEnum = "uz" | "ru" | "en"
 
@@ -13,5 +14,5 @@ export const DEFAULT_LANG: LanguageEnum = "en"
 
 
 export const dictionary: Dictionary = {
-    en, ru
+    en, ru, uz
 }

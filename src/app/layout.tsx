@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import "./styles/chat.css";
 import "./styles/globals.css";
 import React from "react";
-import { Inria_Sans } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { StoreProvider } from "@/components/StoreProvider";
 import "react-loading-skeleton/dist/skeleton.css";
 import { SkeletonTheme } from "react-loading-skeleton";
 import Chat from "@/components/Chat";
-import NoPrerender from "@/components/NoPrerender";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
@@ -31,13 +30,25 @@ export const metadata: Metadata = {
     alternates: {
         canonical: "https://tojiboyevumidjon.uz/",
         languages: {
-            en: "https://tojiboyevumidjon.uz/en",
+            en: "https://tojiboyevumidjon.uz/",
             ru: "https://tojiboyevumidjon.uz/ru",
+            uz: "https://tojiboyevumidjon.uz/uz",
         },
     },
 };
 
-const inria = Inria_Sans({ weight: ["300", "400", "700"], subsets: ["latin"] });
+const grotesk = Space_Grotesk({
+    weight: ["400", "500", "600", "700"],
+    subsets: ["latin"],
+    variable: "--font-grotesk",
+    display: "swap",
+});
+const mono = JetBrains_Mono({
+    weight: ["400", "500"],
+    subsets: ["latin"],
+    variable: "--font-mono-jb",
+    display: "swap",
+});
 
 export default function RootLayout({
     children,
@@ -48,8 +59,8 @@ export default function RootLayout({
     
     return (
         <StoreProvider>
-            <html lang={"en"}>
-                <body className={inria.className}>
+            <html lang={"en"} className={`${grotesk.variable} ${mono.variable}`}>
+                <body className={"font-sans antialiased"}>
                     {/*<Loading>*/}
                     <SkeletonTheme
                         baseColor="var(--skeleton-base)"
@@ -58,7 +69,6 @@ export default function RootLayout({
                         {children}
                     </SkeletonTheme>
                     <Chat />
-                    <NoPrerender />
                     {/*</Loading>*/}
                 </body>
                 {gaId && <GoogleAnalytics gaId={gaId} />}
