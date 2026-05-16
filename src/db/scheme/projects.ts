@@ -1,4 +1,4 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, models, Document } from 'mongoose';
 
 interface IProject extends Document {
     title: Record<string, string>;
@@ -33,4 +33,4 @@ const ProjectSchema = new Schema<IProject>({
     }
 });
 
-export default mongoose.models.Project ||  model<IProject>('Project', ProjectSchema);
+export default models.Project || model<IProject>('Project', ProjectSchema);

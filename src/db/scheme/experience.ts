@@ -1,4 +1,4 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, models, Document } from 'mongoose';
 
 interface IExperience extends Document {
     title: Record<string, string>;
@@ -29,4 +29,4 @@ const ExperienceSchema = new Schema<IExperience>({
     }
 });
 
-export default mongoose.models.Experience || model<IExperience>('Experience', ExperienceSchema);
+export default models.Experience || model<IExperience>('Experience', ExperienceSchema);

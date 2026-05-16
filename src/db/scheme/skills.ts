@@ -1,4 +1,4 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, models, Document } from 'mongoose';
 
 interface ISkill extends Document {
     name: string;
@@ -21,4 +21,4 @@ const SkillSchema = new Schema<ISkill>({
     }
 });
 
-export default mongoose.models.Skill || model<ISkill>('Skill', SkillSchema);
+export default models.Skill || model<ISkill>('Skill', SkillSchema);
