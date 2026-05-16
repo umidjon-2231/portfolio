@@ -11,7 +11,6 @@ function getLocale(request: NextRequest): string | undefined {
 
     const locales: string[] = Object.keys(dictionary);
 
-    console.log(locales)
     const languages = new Negotiator({headers: negotiatorHeaders}).languages(
         locales,
     );
@@ -19,12 +18,11 @@ function getLocale(request: NextRequest): string | undefined {
     return matchLocale(languages, locales, DEFAULT_LANG);
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     if (
         pathname.match(/\/(.+)\.(.+)/)?.index !== undefined
     ) return
-    console.log(pathname)
     const pathnameIsMissingLocale = Object.keys(dictionary).every(
         (locale) =>
             !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
