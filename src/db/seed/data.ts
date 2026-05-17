@@ -18,7 +18,7 @@ export const profileSeed = {
     ),
     city: L('Tashkent, Uzbekistan'),
     age: 20,
-    status: L('Open to senior engineering roles'),
+    status: L('Open to new engineering roles'),
     socialLinks: {
         github: 'https://github.com/umidjon-2231',
         linkedin: 'https://linkedin.com/in/tojiboyevumidjon',
@@ -27,7 +27,7 @@ export const profileSeed = {
         email: 'tumidjon808@gmail.com',
     },
     careerGoals: [
-        L('Senior / lead engineering roles at high-growth tech companies'),
+        L('Engineering roles at high-growth tech companies'),
         L('AI/ML transition through coursework and product ideation'),
         L('Open-source contributions to n8n, expo/expo and langchainjs'),
     ],
