@@ -9,7 +9,8 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "eslint .",
-    "db:seed": "tsx --env-file=.env src/db/seed/run.ts"
+    "db:seed": "tsx --env-file=.env src/db/seed/run.ts",
+    "db:check": "tsx --env-file=.env scripts/dbcheck.ts"
   },
   "dependencies": {
     "@date-fns/tz": "^1.1.2",
