@@ -1,17 +1,15 @@
-import HomePage from "@/components/HomePage";
-import React, {FC} from 'react';
-import axios from "axios";
+import {notFound} from 'next/navigation';
+import {dictionary, type LanguageEnum} from '@/locales';
+import PortfolioPage from '@/components/portfolio/PortfolioPage';
 
-type PageProps = object
+export const revalidate = 60;
 
-const Page: FC<PageProps> = async () => {
-    try{
-        const req = await axios.get(process.env.DOMAIN + "/api/info")
-        return <HomePage info={(req.data).data}/>
-    }catch (e) {
-        console.log(e)
-        return <div>Something went wrong!</div>
-    }
-};
-
-export default Page;
+export default async function LocalizedHome({
+    params,
+}: {
+    params: Promise<{lang: string}>;
+}) {
+    const {lang} = await params;
+    if (!(lang in dictionary)) notFound();
+    return <PortfolioPage lang={lang as LanguageEnum} />;
+}

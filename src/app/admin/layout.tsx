@@ -1,27 +1,8 @@
-"use client"
-import React, {FC, PropsWithChildren, useEffect} from 'react';
-import {AdminContext, sessionStorageTokenKey} from './context';
-import AdminAuth from "@/components/admin/AdminAuth";
-import {ReCaptchaProvider} from "next-recaptcha-v3";
+import {FC, PropsWithChildren} from 'react';
 
+// Segment boundary for /admin. The real auth gate is the proxy
+// (src/proxy.ts) plus the (panel) layout's server-side getSession check.
+// /admin/login lives outside the (panel) shell.
+const AdminLayout: FC<PropsWithChildren> = ({children}) => <>{children}</>;
 
-const Layout: FC<PropsWithChildren> = ({children}) => {
-    const [token, setToken] = React.useState<string | null>(null);
-
-    useEffect(() => {
-        const localToken = sessionStorage?.getItem(sessionStorageTokenKey);
-        if (localToken) {
-            setToken(localToken);
-        }
-    }, []);
-
-    return (
-        <AdminContext.Provider value={{token}}>
-            <ReCaptchaProvider>
-                {token ? children : <AdminAuth/>}
-            </ReCaptchaProvider>
-        </AdminContext.Provider>
-    );
-};
-
-export default Layout;
+export default AdminLayout;

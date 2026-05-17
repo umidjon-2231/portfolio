@@ -1,88 +1,137 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+/* ---- Design tokens (Tailwind v4 CSS-first theme) ---- */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+
+  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, SFMono-Regular, monospace;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 0.25s;
+  --dur-med: 0.55s;
+  --dur-slow: 0.9s;
+}
+
+/*
+  Tailwind v4 default border color compatibility (kept from the v3->v4
+  migration so existing utility usage stays visually identical).
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-line, currentcolor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
 
 :root {
-    --background: #f1f1f1;
-    --foreground: #030712;
-    --secondary: #00000080;
-    --skeleton-base: #ebebeb;
-    --skeleton-highlight: #f5f5f5;
-    --loader-color: blue;
-    --chat--toggle--background: var(--background);
-    --chat--toggle--hover--background: var(--secondary);
-    --chat--toggle--active--background: var(--secondary);
-    --chat--toggle--color: var(--secondary);
+  /* signature: warm paper + ink + vermilion accent (deliberately not "AI slop") */
+  --background: #f4f4ef;
+  --foreground: #0b0b0b;
+  --surface: #ffffff;
+  --muted: #6f6f66;
+  --line: #e3e3d9;
+  --accent: #ff4a1c;
+  --accent-ink: #0b0b0b;
+
+  /* legacy vars still referenced by chat.css / skeleton / older bits */
+  --secondary: #00000080;
+  --skeleton-base: #ebebeb;
+  --skeleton-highlight: #f5f5f5;
+  --loader-color: var(--accent);
+  --chat--toggle--background: var(--accent);
+  --chat--toggle--hover--background: var(--foreground);
+  --chat--toggle--active--background: var(--foreground);
+  --chat--toggle--color: var(--background);
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --background: #030712;
-        --foreground: #f5f5f5;
-        --secondary: #f5f5f580;
-        --skeleton-base: #202020;
-        --skeleton-highlight: #444;
-    }
+  :root {
+    --background: #0a0a0a;
+    --foreground: #f5f5f0;
+    --surface: #141413;
+    --muted: #8a8a80;
+    --line: #262624;
+    --accent: #ff5a2c;
+    --accent-ink: #0b0b0b;
+
+    --secondary: #f5f5f580;
+    --skeleton-base: #1c1c1c;
+    --skeleton-highlight: #2c2c2c;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-    color: var(--foreground);
-    background: var(--background);
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-
-.navigation a {
-    margin: 0 1.5rem;
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 
-@layer utilities {
-    .text-balance {
-        text-wrap: balance;
-    }
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
+/* loader (kept for the existing Loading component) */
 .loader {
-    border-bottom-color: transparent;
-    border-top-color: var(--loader-color);
-    border-right-color: var(--loader-color);
-    border-left-color: var(--loader-color);
-    -webkit-animation: spin 1s linear infinite;
-    animation: spin 1s linear infinite;
+  border-bottom-color: transparent;
+  border-top-color: var(--loader-color);
+  border-right-color: var(--loader-color);
+  border-left-color: var(--loader-color);
+  animation: spin 1s linear infinite;
 }
 
-
-.hi-title{
-    display: block;
-    user-select: none;
-    animation: hi-sticker 1s linear infinite;
-    -webkit-animation: hi-sticker 1s ease-in-out infinite;
-}
-
-.chat-window-toggle{
-    border: 1px solid var(--foreground);
-    &:hover{
-        background: var(--foreground);
-        color: var(--background);
-    }
-}
-
-@keyframes hi-sticker {
-    0%{
-        transform: rotate(15deg);
-    }
-    50%{
-        transform: rotate(-45deg);
-    }
-    100%{
-        transform: rotate(15deg);
-    }
+.chat-window-toggle {
+  border: 1px solid var(--foreground);
+  &:hover {
+    background: var(--foreground);
+    color: var(--background);
+  }
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

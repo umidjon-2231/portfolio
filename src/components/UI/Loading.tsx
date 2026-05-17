@@ -24,7 +24,7 @@ const Loading: FC<PropsWithChildren> = memo<PropsWithChildren>(({children}) => {
         <LoadingContext value={{showLoading: () => setLoading(true), hideLoading: () => setLoading(false)}}>
             {loading &&
                 <div
-                    className="flex items-center justify-center min-h-screen fixed backdrop-blur-[2px] inset-0 z-[1060]"
+                    className="flex items-center justify-center min-h-screen fixed backdrop-blur-[2px] inset-0 z-1060"
                 >
                     <div className="loader ease-linear rounded-full border-8 border-t-8  h-16 w-16"/>
                 </div>

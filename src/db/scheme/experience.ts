@@ -1,32 +1,39 @@
-import { Schema, model, Document } from 'mongoose';
+import {model, models, Schema, Types} from 'mongoose';
+import {LocalizedString, LocalizedStringSchema} from './_shared';
 
-interface IExperience extends Document {
-    title: Record<string, string>;
+export interface IExperience {
+    _id: Types.ObjectId;
+    role: LocalizedString;
     company: string;
+    employmentType?: string;
+    location?: string;
+    remote: boolean;
     startDate: Date;
     endDate?: Date;
-    description: Record<string, string>;
+    current: boolean;
+    description: LocalizedString;
+    highlights: LocalizedString[];
+    techStack: string[];
+    order: number;
     createdAt: Date;
+    updatedAt: Date;
 }
 
 const ExperienceSchema = new Schema<IExperience>({
-    title: {
-        type: Map,
-        of: String,
-        required: true,
-    },
-    company: { type: String, required: true },
-    startDate: { type: Date, required: true },
-    endDate: Date,
-    description: {
-        type: Map,
-        of: String,
-        required: true,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    }
-});
+    role: {type: LocalizedStringSchema, required: true},
+    company: {type: String, required: true, trim: true},
+    employmentType: {type: String, trim: true},
+    location: {type: String, trim: true},
+    remote: {type: Boolean, default: false},
+    startDate: {type: Date, required: true},
+    endDate: {type: Date},
+    current: {type: Boolean, default: false},
+    description: {type: LocalizedStringSchema, required: true},
+    highlights: {type: [LocalizedStringSchema], default: []},
+    techStack: {type: [String], default: []},
+    order: {type: Number, default: 0},
+}, {timestamps: true});
 
-export default mongoose.models.Experience || model<IExperience>('Experience', ExperienceSchema);
+ExperienceSchema.index({order: 1, startDate: -1});
+
+export default models.Experience || model<IExperience>('Experience', ExperienceSchema);

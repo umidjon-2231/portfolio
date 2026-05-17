@@ -12,17 +12,13 @@ const useThemeDetector = () => {
     const [theme, setTheme] = useState<"dark" | "light">(getCurrentTheme());
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
+        if (typeof window === "undefined") return;
 
-            const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const handleThemeChange = () => setTheme(getCurrentTheme());
 
-            const handleThemeChange = () => setTheme(getCurrentTheme());
-
-            mediaQuery.addEventListener("change", handleThemeChange);
-            return () => mediaQuery.removeEventListener("change", handleThemeChange);
-        } else {
-            setTheme("light");
-        }
+        mediaQuery.addEventListener("change", handleThemeChange);
+        return () => mediaQuery.removeEventListener("change", handleThemeChange);
     }, []);
 
     return theme;

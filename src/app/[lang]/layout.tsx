@@ -7,8 +7,9 @@ export const metadata: Metadata = {
     alternates: {
         canonical: "https://tojiboyevumidjon.uz/",
         languages: {
-            'en': 'https://tojiboyevumidjon.uz/en',
+            'en': 'https://tojiboyevumidjon.uz/',
             'ru': 'https://tojiboyevumidjon.uz/ru',
+            'uz': 'https://tojiboyevumidjon.uz/uz',
         },
     }
 };

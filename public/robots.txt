@@ -2,7 +2,7 @@
 User-agent: *
 Allow: /
 Allow: /ru
-Allow: /en
+Allow: /uz
 Disallow: /admin
 
 # Host
