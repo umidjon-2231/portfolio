@@ -2,6 +2,7 @@
 import {useEffect, useState} from 'react';
 import Link from 'next/link';
 import type {DictionaryType, LanguageEnum} from '@/locales';
+import {setLocaleAndGo} from '@/lib/setLocale';
 
 const LOCALES: LanguageEnum[] = ['en', 'ru', 'uz'];
 
@@ -66,9 +67,10 @@ export default function SiteNav({
                     </Link>
                     <span className="flex items-center gap-2 border-l border-line pl-5 font-mono text-xs uppercase">
                         {LOCALES.map((l) => (
-                            <Link
+                            <button
                                 key={l}
-                                href={localeHref(l)}
+                                type="button"
+                                onClick={() => setLocaleAndGo(l)}
                                 className={
                                     l === lang
                                         ? 'text-accent'
@@ -76,7 +78,7 @@ export default function SiteNav({
                                 }
                             >
                                 {l}
-                            </Link>
+                            </button>
                         ))}
                     </span>
                 </nav>
@@ -105,13 +107,14 @@ export default function SiteNav({
                         </Link>
                         <span className="mt-2 flex gap-4 font-mono text-sm uppercase">
                             {LOCALES.map((l) => (
-                                <Link
+                                <button
                                     key={l}
-                                    href={localeHref(l)}
+                                    type="button"
+                                    onClick={() => setLocaleAndGo(l)}
                                     className={l === lang ? 'text-accent' : 'text-muted'}
                                 >
                                     {l}
-                                </Link>
+                                </button>
                             ))}
                         </span>
                     </nav>

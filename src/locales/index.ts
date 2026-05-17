@@ -12,6 +12,9 @@ export type DictionaryType = typeof en;
 
 export const DEFAULT_LANG: LanguageEnum = "en"
 
+/** Sticky language choice set by the locale switcher; honored by the proxy. */
+export const LOCALE_COOKIE = "NEXT_LOCALE"
+
 
 export const dictionary: Dictionary = {
     en, ru, uz

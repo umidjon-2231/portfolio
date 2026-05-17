@@ -3,7 +3,7 @@ import {NextResponse} from "next/server";
 
 import {match as matchLocale} from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-import {DEFAULT_LANG, dictionary} from "@/locales";
+import {DEFAULT_LANG, LOCALE_COOKIE, dictionary} from "@/locales";
 import {verifySession} from "@/lib/auth/jwt";
 import {ADMIN_COOKIE} from "@/lib/auth/constants";
 
@@ -43,8 +43,15 @@ export async function proxy(request: NextRequest) {
     );
 
     if (pathnameIsMissingLocale) {
-        const locale = getLocale(request);
-        if (locale==="en") return
+        // A sticky cookie (set by the language switcher) always wins over
+        // the browser's Accept-Language, so an explicit choice — including
+        // English — is honored instead of being redirected away.
+        const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
+        const locale =
+            cookie && Object.keys(dictionary).includes(cookie)
+                ? cookie
+                : getLocale(request);
+        if (locale === "en") return;
         return NextResponse.redirect(
             new URL(
                 `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,

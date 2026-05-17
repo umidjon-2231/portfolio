@@ -18,6 +18,7 @@ if (process.env.MONGODB_URI?.startsWith("mongodb+srv://")) {
         .filter(Boolean);
     try {
         dns.setServers(servers);
+        dns.setDefaultResultOrder?.("ipv4first");
     } catch (e) {
         console.error("[mongodb] failed to set DNS servers:", e);
     }
@@ -37,17 +38,41 @@ if (!cached) {
     cached = global.mongoose = { conn: null, promise: null };
 }
 
+const opts: ConnectOptions = {
+    serverSelectionTimeoutMS: 8000,
+    socketTimeoutMS: 45000,
+    family: 4, // IPv4 — avoids flaky IPv6/DNS paths
+};
+
+// Retry the whole connect (which re-runs the SRV lookup) a few times so
+// a transient `querySrv ECONNREFUSED` self-heals instead of rendering an
+// empty site. The permanent cure for a network that flakes on SRV is a
+// non-SRV (mongodb://host1,host2,…/db?replicaSet=…) connection string.
+async function connectWithRetry(attempts = 4) {
+    let lastErr: unknown;
+    for (let i = 1; i <= attempts; i++) {
+        try {
+            return await mongoose.connect(MONGODB_URI, opts);
+        } catch (e) {
+            lastErr = e;
+            console.error(
+                `[mongodb] connect attempt ${i}/${attempts} failed:`,
+                e instanceof Error ? e.message : e,
+            );
+            if (i < attempts) {
+                await new Promise((r) => setTimeout(r, 800 * i));
+            }
+        }
+    }
+    throw lastErr;
+}
+
 async function dbConnect() {
     if (cached.conn) {
         return cached.conn;
     }
     if (!cached.promise) {
-        const opts: ConnectOptions = {
-
-        };
-        cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-            return mongoose;
-        });
+        cached.promise = connectWithRetry();
     }
     try {
         cached.conn = await cached.promise;

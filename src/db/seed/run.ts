@@ -1,9 +1,8 @@
 /**
- * One-shot, idempotent seed. Run with `pnpm db:seed`.
- * - Singletons (Profile, SocialProof): created only if absent (never
- *   overwrites admin edits).
- * - Collections: inserted only if the collection is empty.
- * Safe to re-run in any environment.
+ * Seed. Run with `pnpm db:seed` (idempotent — singletons created only
+ * if absent, collections only if empty) or `pnpm db:seed --reset`
+ * (wipes every seeded collection/singleton first, then re-seeds — use
+ * to re-apply changed seed content; this discards admin edits).
  */
 import mongoose from 'mongoose';
 import dbConnect from '@/lib/mongodb';
@@ -64,9 +63,27 @@ async function seedCollection(
     console.log(`✓ ${name}: inserted ${docs.length}`);
 }
 
+const RESET = process.argv.includes('--reset');
+
+const ALL_MODELS = [
+    Profile, SocialProof, Experience, Project, Skill, Education,
+    Certification, Writing, OpenSource, EventModel, Coursework,
+];
+
 async function main() {
     await dbConnect();
-    console.log('Connected. Seeding…\n');
+
+    if (RESET) {
+        console.log('Connected. Resetting seeded collections…\n');
+        for (const m of ALL_MODELS) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const res = await (m as any).deleteMany({});
+            console.log(`✗ ${m.modelName}: cleared ${res.deletedCount}`);
+        }
+        console.log('');
+    } else {
+        console.log('Connected. Seeding…\n');
+    }
 
     await seedSingleton('Profile', Profile, profileSeed);
     await seedSingleton('SocialProof', SocialProof, socialProofSeed);

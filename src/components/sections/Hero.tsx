@@ -78,8 +78,9 @@ export default function Hero({
                         {dict.ui.getInTouch}
                     </a>
                     {status && (
-                        <span className="ml-1 font-mono text-xs uppercase tracking-widest text-muted">
-                            {dict.ui.availableFor}: {status}
+                        <span className="ml-1 inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-muted">
+                            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                            {status}
                         </span>
                     )}
                 </div>
