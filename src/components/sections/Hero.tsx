@@ -29,7 +29,7 @@ export default function Hero({
     lang: LanguageEnum;
     dict: DictionaryType;
 }) {
-    const headline = profile ? localized(profile.headline, lang) : 'Full-Stack Engineer & CTO';
+    const headline = profile ? localized(profile.headline, lang) : 'Software Engineer';
     const bio = profile ? localized(profile.shortBio, lang) : '';
     const city = profile ? localized(profile.city, lang) : '';
     const status = profile ? localized(profile.status, lang) : '';
