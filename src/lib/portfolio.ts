@@ -13,10 +13,13 @@ import {
     getSocialProof,
 } from '@/db/service';
 
-async function safe<T>(p: Promise<T>, fallback: T): Promise<T> {
+async function safe<T>(label: string, p: Promise<T>, fallback: T): Promise<T> {
     try {
         return await p;
-    } catch {
+    } catch (e) {
+        // Surface the real reason (bad MONGODB_URI, auth, unseeded, etc.)
+        // instead of silently rendering an empty site.
+        console.error(`[portfolio] ${label} failed:`, e instanceof Error ? e.message : e);
         return fallback;
     }
 }
@@ -41,18 +44,18 @@ export async function loadPortfolio() {
         coursework,
         socialProof,
     ] = await Promise.all([
-        safe(getProfile(), null),
-        safe(getFeaturedProjects(), []),
-        safe(getAllProjects(), []),
-        safe(getExperience(), []),
-        safe(getSkills(), []),
-        safe(getEducation(), []),
-        safe(getCertifications(), []),
-        safe(getWriting(), []),
-        safe(getOpenSource(), []),
-        safe(getEvents(), []),
-        safe(getCoursework(), []),
-        safe(getSocialProof(), null),
+        safe('profile', getProfile(), null),
+        safe('featuredProjects', getFeaturedProjects(), []),
+        safe('allProjects', getAllProjects(), []),
+        safe('experience', getExperience(), []),
+        safe('skills', getSkills(), []),
+        safe('education', getEducation(), []),
+        safe('certifications', getCertifications(), []),
+        safe('writing', getWriting(), []),
+        safe('openSource', getOpenSource(), []),
+        safe('events', getEvents(), []),
+        safe('coursework', getCoursework(), []),
+        safe('socialProof', getSocialProof(), null),
     ]);
 
     return {
