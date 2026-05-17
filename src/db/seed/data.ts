@@ -9,16 +9,16 @@ const L = (en: string) => ({en, ru: '', uz: ''});
 
 export const profileSeed = {
     fullName: 'Umidjon Tojiboyev',
-    headline: L('Full-Stack Engineer & CTO'),
+    headline: L('Software Engineer'),
     shortBio: L(
-        '20-year-old full-stack engineer from Tashkent. CTO at Bron24 and Software Engineer at BIS. I build production systems: ERP integrations, real-time platforms and payment gateways.',
+        '20-year-old software engineer from Tashkent. I build production systems — ERP integrations, real-time platforms and payment gateways — at BIS and Bron24.',
     ),
     longBio: L(
         'I started coding formally at around 15. Today I work across the stack — Next.js and React on the front, Node.js/TypeScript and Spring Boot on the back, SAP Business One and HANA SQL on the enterprise side. My debut Habr article on PostgreSQL design hit the top-5 of the day across the largest CIS developer community, and I was invited to join the Habr content studio. I participated in the International AI Forum in Tashkent at the launch of the "Five Million Uzbek AI Prompters" initiative, and I build AI automation pipelines with n8n and the Claude API.',
     ),
     city: L('Tashkent, Uzbekistan'),
     age: 20,
-    status: L('Open to senior / CTO-level roles'),
+    status: L('Open to senior engineering roles'),
     socialLinks: {
         github: 'https://github.com/umidjon-2231',
         linkedin: 'https://linkedin.com/in/tojiboyevumidjon',
@@ -27,7 +27,7 @@ export const profileSeed = {
         email: 'tumidjon808@gmail.com',
     },
     careerGoals: [
-        L('Senior / CTO-level roles at high-growth tech companies'),
+        L('Senior / lead engineering roles at high-growth tech companies'),
         L('AI/ML transition through coursework and product ideation'),
         L('Open-source contributions to n8n, expo/expo and langchainjs'),
     ],
@@ -55,14 +55,14 @@ export const experienceSeed = [
         order: 0,
     },
     {
-        role: L('CTO / Frontend Web Developer'),
+        role: L('Mobile & Frontend Developer'),
         company: 'Bron24',
         employmentType: 'Part-time',
         location: 'Tashkent, Uzbekistan',
         remote: false,
         startDate: new Date('2025-02-01'),
         current: true,
-        description: L('Sport venue booking platform; technical leadership and frontend.'),
+        description: L('Sport venue booking platform — mobile and frontend development.'),
         highlights: [
             L('AI-powered nightly analytics pipeline: n8n + Claude API → Telegram reports'),
             L('Weather data integration planning (Open-Meteo)'),
