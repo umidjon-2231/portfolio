@@ -28,7 +28,7 @@ export async function verifySession(
 ): Promise<SessionPayload | null> {
     if (!token) return null;
     try {
-        const {payload} = await jwtVerify(token, getSecret());
+        const {payload} = await jwtVerify(token, getSecret(), {algorithms: ['HS256']});
         return payload.role === 'admin' ? (payload as SessionPayload) : null;
     } catch {
         return null;
