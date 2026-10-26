@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image
-FROM node:20-alpine AS base
+FROM node:24-alpine AS base
 
 # Enable pnpm via corepack (version pinned by package.json "packageManager")
 RUN corepack enable

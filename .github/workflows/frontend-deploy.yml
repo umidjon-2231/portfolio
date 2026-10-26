@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -42,7 +42,7 @@ jobs:
             echo Locating path: "$PROJECT_PATH"
             cd $PROJECT_PATH
             git pull
-            docker compose build
+            docker compose build --pull
   run:
     runs-on: ubuntu-22.04
     needs: [test, build]
